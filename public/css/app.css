@@ -90,3 +90,17 @@ button.submit:hover{
     color: #FFFFFF;
     background-color: forestgreen;
 }
+
+
+/* Outputs view */
+
+.col1
+{
+    margin-left: 10px;
+    color: red;
+}
+
+.col2
+{
+    margin-right: 10px;
+}
