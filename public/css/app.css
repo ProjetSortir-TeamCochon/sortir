@@ -51,17 +51,42 @@ header
     color: #0088a9;
 }
 
-button
-{
-    margin-left: 20px;
-    padding: 9px 25px;
-    background-color: rgba(0,136,169,1);
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease 0s;
+/*alert*/
+.alert{
+    color: red;
+    background-color: #FDB7B7;
+    font-style: italic;
+    border: 1px solid red;
+    padding: 1em;
+    border-radius: 10px;
+    width: max-content;
 }
 
-button:hover
-{
-    background-color: rgba(0,136,169,0.8);
+/* forms */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin-bottom: 1em;
+}
+
+/*buttons*/
+button.submit{
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid forestgreen;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.submit:hover{
+    color: #FFFFFF;
+    background-color: forestgreen;
 }
