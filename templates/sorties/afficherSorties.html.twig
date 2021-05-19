@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Afficher une sortie
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
+<div class="containerSortie">
+    <div id="afficherSortie" class="container1sortie">
+        <p class="paraAfficherSortie">Nom de la sortie : </p>
+        <p class="paraAfficherSortie"> Date/heure de la sortie : </p>
+        <p class="paraAfficherSortie"> Date limite d'inscription : </p>
+        <p class="paraAfficherSortie"> Nombre de places: </p>
+        <p class="paraAfficherSortie"> Durée : </p>
+        <p class="paraAfficherSortie"> Description et infos : </p>
+
+    </div>
+
+    <div id="afficherSortie" class="container2sortie">
+        <p class="paraAfficherSortie">{{ sortie.nom }}</p>
+        <p class="paraAfficherSortie">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</p>
+        <p class="paraAfficherSortie">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</p>
+        <p class="paraAfficherSortie">{{ sortie.nbInscriptionsMax }}</p>
+        <p class="paraAfficherSortie">{{ sortie.duree }} minutes</p>
+        <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
+
+    </div>
+
+    <div id="afficherSortie" class="container3sortie">
+        <p class="paraAfficherSortie">Campus : </p>
+        <p class="paraAfficherSortie">Lieu : </p>
+        <p class="paraAfficherSortie">Rue : </p>
+        <p class="paraAfficherSortie">Code postal : </p>
+        <p class="paraAfficherSortie">Latitude : </p>
+        <p class="paraAfficherSortie">Longitude : </p>
+
+    </div>
+
+    <div id="afficherSortie" class="container4sortie">
+        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> NC </p>
+    </div>
+</div>
+    <div class="boutonAfficherSortiesDiv">
+    <a href="{{ path('sorties_annuler', {'id':sortie.id}) }}"><button class="boutonAfficherSorties">Annuler</button></a>
+    </div>
+{% endblock %}
