@@ -12,10 +12,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+/**
+ * @Route("/sortie", name="sortie_")
+ */
 class CreateSortieController extends AbstractController
 {
     /**
-     * @Route("/create/", name="createSortie_create")
+     * @Route("/create", name="create")
      */
     public function create(
         Request $request,
