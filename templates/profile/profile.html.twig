@@ -6,6 +6,15 @@
 
     <h2>Mon profil</h2>
 
-    <div></div>
+
+    {{ form_start(registrationForm) }}
+
+    {{ form_widget(registrationForm) }}
+
+    <button type="submit" class="submit">Enregistrer</button>
+
+    {{ form_end(registrationForm) }}
+
+
 
 {% endblock %}
