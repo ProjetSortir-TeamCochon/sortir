@@ -22,12 +22,7 @@ class Campus
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $Nom;
-
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $CodePostal;
+    private $nom;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="campus")
@@ -46,24 +41,12 @@ class Campus
 
     public function getNom(): ?string
     {
-        return $this->Nom;
+        return $this->nom;
     }
 
-    public function setNom(?string $Nom): self
+    public function setNom(?string $nom): self
     {
-        $this->Nom = $Nom;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?int
-    {
-        return $this->CodePostal;
-    }
-
-    public function setCodePostal(?int $CodePostal): self
-    {
-        $this->CodePostal = $CodePostal;
+        $this->nom = $nom;
 
         return $this;
     }
