@@ -62,6 +62,17 @@ class User implements UserInterface
      */
     private $actif;
 
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="user")
+     */
+    private $campus;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -199,6 +210,25 @@ class User implements UserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
