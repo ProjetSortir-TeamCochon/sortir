@@ -1,0 +1,18 @@
+<h1> Creation d'une sortie </h1>
+
+{{ form_start(sortieForm) }}
+
+{{ form_widget(sortieForm) }}
+
+<button> Créer </button>
+
+{{ form_end(sortieForm) }}
+
+{# read and display all flash messages #}
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash flash-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
