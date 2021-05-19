@@ -1,9 +1,25 @@
 <img class="logo" src="img/logo/logo.png" alt="logo">
 <nav>
     <ul class="nav_links">
-        <li><a href="#">VILLES</a> </li>
-        <li><a href="#">CAMPUS</a> </li>
-        <li><a href="{{ path('main_accueil') }}">ACCUEIL</a></li>
-        <li><a href="{{ path('edit_profile') }}">MON PROFIL</a></li>
+        <li><a href="{{ path('main_accueil') }}" title="Accueil">ACCUEIL</a></li>
+
+        {% if app.user %}
+
+            <li><a href="{{ path('app_logout') }}" title="se déconnecter">SE DÉCONNECTER</a></li>
+            <li><a href="{{ path('profile', {'id':app.user.id}) }}" title="mon profil">MON PROFIL</a></li>
+
+        {% else %}
+
+            <li><a href="{{ path('app_login') }}" title="se connecter">SE CONNECTER</a></li>
+
+        {% endif %}
+
+        {% if is_granted('ROLE_ADMIN') %}
+
+        <li><a href="#" title="Villes">VILLES</a> </li>
+        <li><a href="#" title="Campus">CAMPUS</a> </li>
+        <li><a href="{{ path('app_register') }}" title="nouvel élève">INSCRIPTION D'UN ELEVE</a></li>
+
+       {% endif %}
     </ul>
 </nav>
