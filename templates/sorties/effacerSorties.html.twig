@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Afficher une sortie
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
+    <div class="containerSortie">
+        <div id="afficherSortie" class="container1sortie">
+            <p class="paraAfficherSortie">Nom de la sortie : </p>
+            <p class="paraAfficherSortie"> Date : </p>
+            <p class="paraAfficherSortie"> Campus : </p>
+            <p class="paraAfficherSortie"> Lieu : </p>
+            <p class="paraAfficherSortie"> Motif : </p>
+
+
+        </div>
+
+        <div id="afficherSortie" class="container2sortie">
+            <p class="paraAfficherSortie">{{ sortie.nom }}</p>
+            <p class="paraAfficherSortie">{{ sortie.dateHeureDebut | date('d/m/Y') }}</p>
+            <p class="paraAfficherSortie"> NC </p>
+            <p class="paraAfficherSortie"> NC </p>
+            <p class="paraAfficherSortie"> NC </p>
+
+
+        </div>
+
+
+    </div>
+
+{% endblock %}

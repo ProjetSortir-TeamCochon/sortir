@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"mail"}, message="There is already an account with this mail")
+ * @UniqueEntity(fields={"username"}, message="There is already an account with this username")
  */
 class User implements UserInterface
 {
@@ -21,6 +23,7 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\Email(message="Merci d'entrer une adresse mail !")
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $mail;
@@ -47,7 +50,7 @@ class User implements UserInterface
     private $prenom;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
     private $telephone;
 
@@ -61,6 +64,25 @@ class User implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $actif;
+
+    /**
+     * @Assert\NotBlank(message="Merci d'entrer un pseudo !")
+     * @Assert\Length(
+     *     min=3,
+     *     max=50,
+     *     minMessage="Minimum 3 caractères s'il-vous-plait!",
+     *     maxMessage="Maximum 50 caractères s'il-vous-plait!"
+     * )
+     * @Assert\Regex(pattern="/^[a-z0-9_-]+$/i", message="Please use only letters, numbers, underscores and dashes!")
+     * @ORM\Column(type="string", length=50, unique=true)
+     */
+    private $username;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="user")
+     */
+    private $campus;
+
 
     public function getId(): ?int
     {
@@ -86,7 +108,14 @@ class User implements UserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->mail;
+        return (string) $this->username;
+    }
+
+    public function setUsername(?string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
@@ -94,11 +123,7 @@ class User implements UserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -167,12 +192,12 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getTelephone(): ?int
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+    public function setTelephone(int $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -199,6 +224,18 @@ class User implements UserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
