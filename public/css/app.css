@@ -1,0 +1,106 @@
+*
+{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+}
+
+li, a, button
+{
+    font-family: Lato;
+    font-weight: 500;
+    font-size: 16px;
+    color: #edf0f1;
+    text-decoration: none;
+}
+
+header
+{
+    background-color: #24252A;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+}
+
+.logo
+{
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    margin-right: auto;
+
+}
+
+
+
+.nav_links li
+{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav_links li a
+{
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover
+{
+    color: #0088a9;
+}
+
+/*alert*/
+.alert{
+    color: red;
+    background-color: #FDB7B7;
+    font-style: italic;
+    border: 1px solid red;
+    padding: 1em;
+    border-radius: 10px;
+    width: max-content;
+}
+
+/* forms */
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 400px;
+    display: block;
+    margin-bottom: 1em;
+}
+
+/*buttons*/
+button.submit{
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid forestgreen;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.submit:hover{
+    color: #FFFFFF;
+    background-color: forestgreen;
+}
+
+
+/* Outputs view */
+
+.col1
+{
+    margin-left: 10px;
+    color: red;
+}
+
+.col2
+{
+    margin-right: 10px;
+}
