@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un nouvel utilisateur | {{ parent() }}{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_mail_error') %}
+        <div class="alert" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+    <h1>Ajouter un nouvel élève au registre</h1>
+
+    {{ form_start(registrationForm) }}
+
+        {{ form_widget(registrationForm)}}
+        <button type="submit" class="submit">Enregistrer</button>
+    {{ form_end(registrationForm) }}
+
+{% endblock %}
