@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil de {{ user.username }} | {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+
+    <h2>{{ user.username }}</h2>
+    <div class="container">
+
+    <section>
+        <div>Prénom :</div>
+        <div>Nom :</div>
+        <div>Téléphone :</div>
+        <div>Email :</div>
+        <div>Campus :</div>
+    </section>    
+    
+    <section>
+        <div>{{ user.prenom }}</div>
+        <div>{{ user.nom }}</div>
+        <div>{{ user.telephone}}</div>
+        <div>{{ user.mail }}</div>
+        <div>{{ user.campus.nom }}</div>
+    </section>
+    </div>
+
+    <div class="button_retour">
+    <a href="{{ path('main_accueil') }}" title="Accueil"><button class="retour">Retour</button></a>
+    </div>
+
+
+{% endblock %}
