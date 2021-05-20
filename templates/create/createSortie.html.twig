@@ -4,6 +4,9 @@
 {% block body %}
 <h1> Creation d'une sortie </h1>
 
+    <table>
+<tr>
+    <td>
 {{ form_start(sortieForm) }}
 
 {{ form_widget(sortieForm) }}
@@ -11,5 +14,31 @@
 <button type="submit" class="submit"> Créer </button>
 
 {{ form_end(sortieForm) }}
+    </td>
 
+    <td>
+        <form>
+        <label for="campus">Campus </label><p name="campus" id="campus"> (nom du campus) </p>
+        <label for="ville">Ville </label> <select name="ville" id="ville">
+            <option value=""> choisir une ville </option>
+            <option value="1"> Nancy </option>
+            <option value="2"> Nantes</option>
+        </select>
+        <label for="lieu">Lieu </label> <select name="lieu" id="lieu">
+            <option value=""> choisir un lieu </option>
+            <option value="1"> Montagne </option>
+            <option value="2"> Grotte </option>
+        </select>
+        <label for="rue">Campus </label><p name="rue" id="rue"> (nom de la rue) </p>
+        <label for="codep">Code postal : </label><p name="codep" id="codep"> (code postal) </p>
+        <label for="latit">Latitude </label><input id="latit" type="number">
+            <label for="longit">Longitude </label><input id="longit" type="number">
+
+        </form>
+    </td>
+
+</tr>
+
+
+    </table>
 {% endblock %}
