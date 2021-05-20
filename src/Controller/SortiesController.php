@@ -7,7 +7,6 @@ namespace App\Controller;
 use App\Entity\Sortie;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use http\Env\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -55,7 +54,7 @@ class SortiesController extends AbstractController
         $entityManager->remove($sortie);
         $entityManager->flush();
 
-        return $this->redirectToRoute('main_home');
+        return $this->redirectToRoute('main_accueil');
 
         return $this->render('sorties/effacerSorties.html.twig');
     }
