@@ -190,6 +190,7 @@ button.submit:hover{
     border-radius: 20px;
     outline: none;
     margin-top: 30px;
+    margin-bottom: 30px;
     margin: auto;
 }
 .boutonAfficherSorties:hover
@@ -202,6 +203,9 @@ button.submit:hover{
 {
     text-align: center;
     margin-top: 50px;
+
+    margin-bottom: 50px;
+
 }
 
 /*profile / fiche */
@@ -243,4 +247,3 @@ section.button{
     display: flex;
     justify-content: space-around;
 }
-

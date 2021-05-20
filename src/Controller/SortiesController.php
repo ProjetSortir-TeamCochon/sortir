@@ -27,6 +27,8 @@ class SortiesController extends AbstractController
 
         $sortie = $sortieRepository->find($id);
 
+
+
         return $this->render('sorties/afficherSorties.html.twig', [
             "sortie" => $sortie
         ]);

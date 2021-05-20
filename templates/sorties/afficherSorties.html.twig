@@ -40,12 +40,13 @@
     </div>
 
     <div id="afficherSortie" class="container4sortie">
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> {{ sortie.campus.nom }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.nom }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.rue }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.ville.codePostal }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.latitude }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
+
     </div>
 
 
