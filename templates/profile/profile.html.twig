@@ -5,15 +5,23 @@
 {% block body %}
 
     <h2>Mon profil</h2>
-
+    <div class="container">
 
     {{ form_start(registrationForm) }}
 
     {{ form_widget(registrationForm) }}
 
-    <button type="submit" class="submit">Enregistrer</button>
+        <section class="button">
+            <button type="submit" class="submit">Enregistrer</button>
+
+            <div class="button_retour">
+                <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="retour">Retour</button></a>
+            </div>
+        </section>
 
     {{ form_end(registrationForm) }}
+
+    </div>
 
 
 
