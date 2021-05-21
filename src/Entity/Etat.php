@@ -12,6 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Etat
 {
+    const CREATED = "Créée";
+    const OPEN = "Ouverte";
+    const CLOSED = "Clôturée";
+    const RUNNING = "Activité en cours";
+    const DONE = "Passée";
+    const CANCELLED = "Annulée";
+
+    const libelles = [
+            self::CREATED,
+            self::OPEN,
+            self::CLOSED,
+            self::RUNNING,
+            self::DONE,
+            self::CANCELLED
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -47,7 +63,6 @@ class Etat
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
         return $this;
     }
 

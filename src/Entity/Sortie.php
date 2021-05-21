@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Etat;
 use App\Repository\SortieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
+ * @ORM\EntityListeners({"App\EventListener\SortieListener"})
  */
 class Sortie
 {
@@ -78,6 +81,8 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
+
+    private $etatRepository;
 
     public function __construct()
     {
@@ -190,10 +195,9 @@ class Sortie
         return $this->etat;
     }
 
-    public function setEtat(?Etat $etat): self
+    public function setEtat(Etat $etat): self
     {
         $this->etat = $etat;
-
         return $this;
     }
 
@@ -235,4 +239,5 @@ class Sortie
 
         return $this;
     }
+
 }
