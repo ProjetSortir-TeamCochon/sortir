@@ -14,7 +14,8 @@
             <p class="paraAfficherSortie"> Date : </p>
             <p class="paraAfficherSortie"> Campus : </p>
             <p class="paraAfficherSortie"> Lieu : </p>
-            <p class="paraAfficherSortie"> Motif : </p>
+
+
 
 
         </div>
@@ -22,18 +23,39 @@
         <div id="afficherSortie" class="container2sortie">
             <p class="paraAfficherSortie">{{ sortie.nom }}</p>
             <p class="paraAfficherSortie">{{ sortie.dateHeureDebut | date('d/m/Y') }}</p>
-            <p class="paraAfficherSortie"> NC </p>
-            <p class="paraAfficherSortie"> NC </p>
-            <p class="paraAfficherSortie"> NC </p>
+            <p class="paraAfficherSortie"> {{ sortie.campus.nom }} </p>
+            <p class="paraAfficherSortie"> {{ sortie.lieu.nom }} </p>
+
 
 
         </div>
 
 
     </div>
+    <div class="containerSortie">
+        <div id="afficherSortie" class="container5sortie">
+
+                <div class="formulaireAnnuler">{{ form_start(motifForm) }}
+
+
+                </div>
+
+            <div class="formulaireAnnuler">
+                {{ form_widget(motifForm) }}
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+
 
 
     <div class="boutonAfficherSortiesDiv">
-        <a href="{{ path('sorties_effacer', {'id':sortie.id}) }}"><button class="boutonAfficherSorties">Effacer</button></a>
+        <a href="#" class="boutonAnnulerSortie"><button class="boutonAfficherSorties">Enregistrer</button></a>
+        {{ form_end(motifForm) }}
+        <a href="{{ path('main_accueil') }}" class="boutonAnnulerSortie"><button class="boutonAfficherSorties">Annuler</button></a>
     </div>
 {% endblock %}

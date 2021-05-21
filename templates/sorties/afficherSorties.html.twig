@@ -9,6 +9,7 @@
 
     <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
 <div class="containerSortie">
+    <section>
     <div id="afficherSortie" class="container1sortie">
         <p class="paraAfficherSortie">Nom de la sortie : </p>
         <p class="paraAfficherSortie"> Date/heure de la sortie : </p>
@@ -28,7 +29,8 @@
         <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
 
     </div>
-
+    </section>
+    <section>
     <div id="afficherSortie" class="container3sortie">
         <p class="paraAfficherSortie">Campus : </p>
         <p class="paraAfficherSortie">Lieu : </p>
@@ -48,7 +50,7 @@
         <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
 
     </div>
-
+    </section>
 
 
 </div>

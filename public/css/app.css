@@ -21,7 +21,6 @@ li, a, button
     text-decoration: none;
 }
 
-
 h1,h2{
     margin-top: 1em;
     display: flex;
@@ -139,14 +138,11 @@ button.submit:hover{
 .containerSortie
 {
     text-align: center;
-
 }
-
 
 #afficherSortie
 {
     display: inline-block;
-
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -176,8 +172,8 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
-    border: solid;
+    width: 220px;
+    font-weight: bold;
     text-align: left;
     max-height: 700px;
 
@@ -186,8 +182,7 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
-    border: solid;
+    width: 220px;
     text-align: right;
     max-height: 700px;
 
@@ -253,6 +248,10 @@ button.submit:hover{
 
 label, input
 {
+    display: inline-block;
+}
+
+label, input {
     display: inline-block;
 }
 
