@@ -15,6 +15,12 @@ li, a, button
     text-decoration: none;
 }
 
+h1,h2{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
 header
 {
     background-color: #24252A;
@@ -114,8 +120,6 @@ button.submit:hover{
 #afficherSortie
 {
     display: inline-block;
-
-
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -203,7 +207,6 @@ button.submit:hover{
 {
     text-align: center;
     margin-top: 50px;
-
     margin-bottom: 50px;
 
 }
@@ -233,11 +236,6 @@ button.retour:hover{
     background-color: lightpink;
 }
 
-h2{
-    display: flex;
-    justify-content: center;
-}
-
 .button_retour{
     display: flex;
     justify-content: center;
@@ -246,4 +244,20 @@ h2{
 section.button{
     display: flex;
     justify-content: space-around;
+}
+
+.avatar{
+    max-width: 17em;
+    border-radius: 10em;
+}
+
+.editAvatar{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+}
+
+.profileForm{
+    display: flex;
+    justify-content: center;
 }

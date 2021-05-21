@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UploadAvatarForm;
 use App\Repository\UserRepository;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -38,17 +39,20 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            $this->addFlash('success', 'Un nouvel élève a été ajouté !');
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
-            // TODO : redirection après inscription d'un nouvel élève vers une autre page + message flash succès
+
+            return $this->redirectToRoute('main_accueil');
         }
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route ("/profile/{id}", name="profile")
@@ -59,44 +63,67 @@ class RegistrationController extends AbstractController
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder)
     {
-        if ($user !== $this->getUser())
-        {
-            throw new AccessDeniedException("Oulala c pa bo de fer sa");
+        if ($user !== $this->getUser()) {
+            throw new AccessDeniedException("Vous n'avez pas l'accès à cette page !");
         }
 
         $form = $this->createForm(RegistrationFormType::class, $user);
+        $uploadAvatarForm = $this->createForm(UploadAvatarForm::class, $user);
 
         $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
 
-                $user = $form->getData();
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('password')->getData()
-                    )
-                );
+            $user = $form->getData();
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('password')->getData()
+                )
+            );
 
-                $entityManager->persist($user);
-                $entityManager->flush();
+            $entityManager->persist($user);
+            $entityManager->flush();
 
-                $this->addFlash('success', 'Votre profil a été édité avec succès !');
+            $this->addFlash('success', 'Votre profil a été édité avec succès !');
 
-                return $this->redirectToRoute('profile',[
-                    'id' => $user->getId()
-                ]);
-            }
-
-            return $this->render('profile/profile.html.twig',[
-                'registrationForm' => $form->createView(),
+            return $this->redirectToRoute('profile', [
+                'id' => $user->getId()
             ]);
+        }
 
+        return $this->render('profile/profile.html.twig', [
+            'registrationForm' => $form->createView(),
+            'uploadAvatarForm' => $uploadAvatarForm->createView()
+        ]);
+
+    }
+
+    /**
+     * @Route("profile/avatar/upload/{id}", name="profile_picture")
+     */
+    public function upload(Request $request, User $user, EntityManagerInterface $entityManager)
+    {
+        $uploadedFile = $request->files->get('upload_avatar_form')['profilePictureName'];
+        $destination = $this->getParameter('kernel.project_dir').'/public/img/profile-picture';
+        $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+        $newFilename = $originalFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+        $uploadedFile->move(
+            $destination,
+            $newFilename
+        );
+        $user->setProfilePictureName($newFilename);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('profile', [
+            'id' => $user->getId()
+        ]);
     }
 
     /**
      * @Route ("/profile/fiche/{id}", name="fiche")
      */
-    public function fiche(int $id, UserRepository $userRepository):Response{
+    public function fiche(int $id, UserRepository $userRepository): Response
+    {
 
         $user = $userRepository->find($id);
 
@@ -104,7 +131,7 @@ class RegistrationController extends AbstractController
             throw $this->createNotFoundException("Impossible d'afficher ce profil !");
         }
 
-        return $this->render('profile/fiche.html.twig',[
+        return $this->render('profile/fiche.html.twig', [
             "user" => $user
         ]);
     }

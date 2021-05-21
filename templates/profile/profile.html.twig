@@ -5,7 +5,25 @@
 {% block body %}
 
     <h2>Mon profil</h2>
-    <div class="container">
+
+    <div class="profileForm">
+
+    <section class="editAvatar">
+
+        <img src="{{ asset('img/profile-picture/' ~ app.user.profilePictureName) }}" class="avatar"/>
+
+        {{ form_start(uploadAvatarForm, {'action': path('profile_picture', {'id': app.user.id}), 'method': 'POST', 'enctype': "multipart/form-data"}) }}
+
+        {{ form_widget(uploadAvatarForm) }}
+
+        <section class="button">
+            <button type="submit" class="submit">Enregistrer</button>
+        </section>
+
+        {{ form_end(uploadAvatarForm) }}
+    </section>
+
+    <section>
 
     {{ form_start(registrationForm) }}
 
@@ -20,6 +38,8 @@
         </section>
 
     {{ form_end(registrationForm) }}
+
+    </section>
 
     </div>
 
