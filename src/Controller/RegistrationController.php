@@ -9,6 +9,7 @@ use App\Repository\UserRepository;
 use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -103,6 +104,13 @@ class RegistrationController extends AbstractController
      */
     public function upload(Request $request, User $user, EntityManagerInterface $entityManager)
     {
+        // S'il y a l'avatar stocké sur serveur, le supprime.
+        if($user->getProfilePictureName()) {
+            $profilePictureName = $user->getProfilePictureName();
+            $filesystem = new Filesystem();
+            $filesystem->remove('img/profile-picture/'.$profilePictureName);
+        }
+
         $uploadedFile = $request->files->get('upload_avatar_form')['profilePictureName'];
         $destination = $this->getParameter('kernel.project_dir').'/public/img/profile-picture';
         $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
