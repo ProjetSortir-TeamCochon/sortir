@@ -21,6 +21,7 @@ li, a, button
     text-decoration: none;
 }
 
+
 h1,h2{
     margin-top: 1em;
     display: flex;
@@ -35,8 +36,6 @@ section
 header
 {
     background-color: #24252A;
-    display: flex;
-    justify-content: flex-end;
     align-items: center;
     padding: 30px 10%;
     display: flex;
@@ -48,7 +47,6 @@ header
     width: 100px;
     height: 100px;
     cursor: pointer;
-    margin-right: auto;
 
 }
 
@@ -120,6 +118,20 @@ button.submit:hover{
     justify-content: center;
 }
 
+button.retour{
+    color: lightpink;
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid lightpink;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.retour:hover{
+    color: #FFFFFF;
+    background-color: lightpink;
+}
+
 /* Outputs view */
 
 .col1
@@ -143,6 +155,7 @@ button.submit:hover{
 #afficherSortie
 {
     display: inline-block;
+
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -191,8 +204,8 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
-    border: solid;
+    width: 220px;
+    font-weight: bold;
     text-align: left;
     max-height: 700px;
 }
@@ -200,8 +213,7 @@ button.submit:hover{
  {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
-    border: solid;
+    width: 220px;
     text-align: right;
     max-height: 700px;
  }
@@ -251,22 +263,18 @@ label, input
     display: inline-block;
 }
 
-label, input {
-    display: inline-block;
-}
-
 .boutonAnnulerSortie
 {
     margin-right: 20px;
     margin-left: 20px;
 }
 
-.formulaireAnnuler {
+.formulaireAnnuler
+{
     display: inline-block;
 }
 
-/*profile / fiche */
-
+/* profile / fiche */
 .container{
     display: flex;
     justify-content: space-evenly;
@@ -274,25 +282,6 @@ label, input {
 
 section div{
     margin: 1em;
-}
-
-button.retour{
-    color: lightpink;
-    padding: 1em 1em;
-    margin-top: 1em;
-    border: 1px solid lightpink;
-    transition-duration: 0.4s;
-    border-radius: 15px;
-}
-
-button.retour:hover{
-    color: #FFFFFF;
-    background-color: lightpink;
-}
-
-.button_retour{
-    display: flex;
-    justify-content: center;
 }
 
 section.button{
