@@ -21,6 +21,13 @@ li, a, button
     text-decoration: none;
 }
 
+
+h1,h2{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
 section
 {
     display: inline-block;
@@ -53,8 +60,6 @@ header
 {
     display: inline-block;
     padding: 0px 20px;
-
-
 }
 
 .nav_links li a
@@ -107,6 +112,10 @@ button.submit:hover{
     background-color: forestgreen;
 }
 
+.button_retour{
+    display: flex;
+    justify-content: center;
+}
 
 /* Outputs view */
 
@@ -134,7 +143,9 @@ button.submit:hover{
 {
     display: inline-block;
 
-
+    max-width: 350px;
+    padding-top: 50px;
+    padding-bottom: 50px;
     max-width: 700px;
     padding-top: 20px;
     padding-bottom: 0px;
@@ -155,7 +166,6 @@ button.submit:hover{
 .paraAfficherSortie
 {
     padding: 20px 5px 20px 5px;
-
 }
 
 .container1sortie
@@ -164,7 +174,6 @@ button.submit:hover{
     min-width: 20px;
     width: 220px;
     font-weight: bold;
-
     text-align: left;
     max-height: 700px;
 
@@ -174,7 +183,6 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-
     text-align: right;
     max-height: 700px;
 
@@ -185,7 +193,6 @@ button.submit:hover{
     min-width: 20px;
     width: 220px;
     font-weight: bold;
-
     text-align: left;
     max-height: 700px;
 }
@@ -194,7 +201,6 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-
     text-align: right;
     max-height: 700px;
  }
@@ -231,7 +237,6 @@ button.submit:hover{
 
 .container5sortie
 {
-
     max-width: 700px;
     min-width: 20px;
     width: 440px;
@@ -254,4 +259,25 @@ label, input
 .formulaireAnnuler
 {
     display: inline-block;
+
+/* profile / fiche */
+section.button{
+    display: flex;
+    justify-content: space-around;
+}
+
+.avatar{
+    max-width: 17em;
+    border-radius: 10em;
+}
+
+.editAvatar{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+}
+
+.profileForm{
+    display: flex;
+    justify-content: center;
 }

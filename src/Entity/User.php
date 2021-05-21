@@ -83,6 +83,10 @@ class User implements UserInterface
      */
     private $campus;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profilePictureName;
 
     public function getId(): ?int
     {
@@ -239,4 +243,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getProfilePictureName(): ?string
+    {
+        return $this->profilePictureName;
+    }
+
+    public function setProfilePictureName(?string $profilePictureName): self
+    {
+        $this->profilePictureName = $profilePictureName;
+
+        return $this;
+    }
+
 }

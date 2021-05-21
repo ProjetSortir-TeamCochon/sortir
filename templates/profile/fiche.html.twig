@@ -10,21 +10,23 @@
     <h2>{{ user.username }}</h2>
     <div class="container">
 
-    <section>
-        <div>Prénom :</div>
-        <div>Nom :</div>
-        <div>Téléphone :</div>
-        <div>Email :</div>
-        <div>Campus :</div>
-    </section>    
-    
-    <section>
-        <div>{{ user.prenom }}</div>
-        <div>{{ user.nom }}</div>
-        <div>{{ user.telephone}}</div>
-        <div>{{ user.mail }}</div>
-        <div>{{ user.campus.nom }}</div>
-    </section>
+        <img src="{{ asset('img/profile-picture/' ~user.profilePictureName) }}" alt="{{ user.profilePictureName }}" class="avatar">
+
+        <section>
+            <div>Prénom :</div>
+            <div>Nom :</div>
+            <div>Téléphone :</div>
+            <div>Email :</div>
+            <div>Campus :</div>
+        </section>
+
+        <section>
+            <div>{{ user.prenom }}</div>
+            <div>{{ user.nom }}</div>
+            <div>{{ user.telephone}}</div>
+            <div>{{ user.mail }}</div>
+            <div>{{ user.campus.nom }}</div>
+        </section>
     </div>
 
     <div class="button_retour">
