@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SortieRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SortieRepository::class)
@@ -18,6 +19,8 @@ class Sortie
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Inserez le nom de la sortie !")
+     * @Assert\Length(min=3, max=255)
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
@@ -33,11 +36,13 @@ class Sortie
     private $duree;
 
     /**
+     * @Assert\LessThanOrEqual(propertyPath="dateHeureDebut")
      * @ORM\Column(type="date")
      */
     private $dateLimiteInscription;
 
     /**
+     * @Assert\Range(min="0")
      * @ORM\Column(type="integer")
      */
     private $nbInscriptionsMax;
@@ -47,10 +52,6 @@ class Sortie
      */
     private $infosSortie;
 
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $etat;
 
     /**
      * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="sorties")
@@ -63,6 +64,12 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $campus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="sorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
 
     public function getId(): ?int
     {
@@ -141,17 +148,7 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?int
-    {
-        return $this->etat;
-    }
 
-    public function setEtat(int $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     public function getLieu(): ?lieu
     {
@@ -173,6 +170,18 @@ class Sortie
     public function setCampus(?Campus $campus): self
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }
