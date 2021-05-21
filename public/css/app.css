@@ -117,6 +117,20 @@ button.submit:hover{
     justify-content: center;
 }
 
+button.retour{
+    color: lightpink;
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid lightpink;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.retour:hover{
+    color: #FFFFFF;
+    background-color: lightpink;
+}
+
 /* Outputs view */
 
 .col1
@@ -135,9 +149,7 @@ button.submit:hover{
 .containerSortie
 {
     text-align: center;
-
 }
-
 
 #afficherSortie
 {
@@ -259,8 +271,18 @@ label, input
 .formulaireAnnuler
 {
     display: inline-block;
+}
 
 /* profile / fiche */
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+section div{
+    margin: 1em;
+}
+
 section.button{
     display: flex;
     justify-content: space-around;
