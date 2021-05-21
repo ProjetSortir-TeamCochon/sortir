@@ -34,6 +34,11 @@ class Campus
      */
     private $sorties;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="campus")
+     */
+    private $sorties;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();

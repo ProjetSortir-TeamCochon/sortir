@@ -9,6 +9,7 @@
 
     <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
 <div class="containerSortie">
+    <section>
     <div id="afficherSortie" class="container1sortie">
         <p class="paraAfficherSortie">Nom de la sortie : </p>
         <p class="paraAfficherSortie"> Date/heure de la sortie : </p>
@@ -28,7 +29,8 @@
         <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
 
     </div>
-
+    </section>
+    <section>
     <div id="afficherSortie" class="container3sortie">
         <p class="paraAfficherSortie">Campus : </p>
         <p class="paraAfficherSortie">Lieu : </p>
@@ -40,13 +42,17 @@
     </div>
 
     <div id="afficherSortie" class="container4sortie">
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
-        <p class="paraAfficherSortie"> NC </p>
+        <p class="paraAfficherSortie"> {{ sortie.campus.nom }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.nom }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.rue }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.ville.codePostal }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.latitude }} </p>
+        <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
+
     </div>
+    </section>
+
+
 </div>
     <div class="boutonAfficherSortiesDiv">
     <a href="{{ path('sorties_annuler', {'id':sortie.id}) }}"><button class="boutonAfficherSorties">Annuler</button></a>
