@@ -6,6 +6,12 @@
     font-family: Lato;
 }
 
+#logoSite
+{
+
+    margin-left: 0px;
+}
+
 li, a, button
 {
     font-family: Lato;
@@ -15,13 +21,18 @@ li, a, button
     text-decoration: none;
 }
 
+section
+{
+    display: inline-block;
+}
+
 header
 {
     background-color: #24252A;
-    display: flex;
-    justify-content: flex-end;
     align-items: center;
     padding: 30px 10%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo
@@ -29,16 +40,21 @@ header
     width: 100px;
     height: 100px;
     cursor: pointer;
-    margin-right: auto;
 
 }
 
-
+.nav_links
+{
+    display: flex;
+    justify-content: flex-end;
+}
 
 .nav_links li
 {
     display: inline-block;
     padding: 0px 20px;
+
+
 }
 
 .nav_links li a
@@ -110,14 +126,16 @@ button.submit:hover{
 .containerSortie
 {
     text-align: center;
+
 }
+
 
 #afficherSortie
 {
     display: inline-block;
 
 
-    max-width: 350px;
+    max-width: 300px;
     padding-top: 50px;
     padding-bottom: 50px;
     margin-left: 100px;
@@ -144,7 +162,7 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
+    width: 220px;
     border: solid;
     text-align: left;
     max-height: 700px;
@@ -154,7 +172,7 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
+    width: 220px;
     border: solid;
     text-align: right;
     max-height: 700px;
@@ -164,7 +182,7 @@ button.submit:hover{
 {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
+    width: 220px;
     border: solid;
     text-align: left;
     max-height: 700px;
@@ -173,7 +191,7 @@ button.submit:hover{
  {
     max-width: 400px;
     min-width: 20px;
-    width: 250px;
+    width: 220px;
     border: solid;
     text-align: right;
     max-height: 700px;
