@@ -135,9 +135,9 @@ button.submit:hover{
     display: inline-block;
 
 
-    max-width: 300px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    max-width: 700px;
+    padding-top: 20px;
+    padding-bottom: 0px;
     margin-left: 100px;
     margin-right: 100px;
     min-width: 10px;
@@ -163,7 +163,8 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+    font-weight: bold;
+
     text-align: left;
     max-height: 700px;
 
@@ -173,7 +174,7 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+
     text-align: right;
     max-height: 700px;
 
@@ -183,7 +184,8 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+    font-weight: bold;
+
     text-align: left;
     max-height: 700px;
 }
@@ -192,7 +194,7 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+
     text-align: right;
     max-height: 700px;
  }
@@ -223,4 +225,33 @@ button.submit:hover{
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/* Annuler Sortie */
+
+.container5sortie
+{
+
+    max-width: 700px;
+    min-width: 20px;
+    width: 440px;
+    font-weight: bold;
+    text-align: left;
+    max-height: 700px;
+}
+
+label, input
+{
+    display: inline-block;
+}
+
+.boutonAnnulerSortie
+{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.formulaireAnnuler
+{
+    display: inline-block;
 }
