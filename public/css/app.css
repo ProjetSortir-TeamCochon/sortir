@@ -6,6 +6,12 @@
     font-family: Lato;
 }
 
+#logoSite
+{
+
+    margin-left: 0px;
+}
+
 li, a, button
 {
     font-family: Lato;
@@ -15,10 +21,16 @@ li, a, button
     text-decoration: none;
 }
 
+
 h1,h2{
     margin-top: 1em;
     display: flex;
     justify-content: center;
+}
+
+section
+{
+    display: inline-block;
 }
 
 header
@@ -28,6 +40,8 @@ header
     justify-content: flex-end;
     align-items: center;
     padding: 30px 10%;
+    display: flex;
+    justify-content: space-between;
 }
 
 .logo
@@ -37,6 +51,12 @@ header
     cursor: pointer;
     margin-right: auto;
 
+}
+
+.nav_links
+{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .nav_links li
@@ -96,6 +116,10 @@ button.submit:hover{
     background-color: forestgreen;
 }
 
+.button_retour{
+    display: flex;
+    justify-content: center;
+}
 
 /* Outputs view */
 
@@ -115,14 +139,20 @@ button.submit:hover{
 .containerSortie
 {
     text-align: center;
+
 }
+
 
 #afficherSortie
 {
     display: inline-block;
+
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
+    max-width: 700px;
+    padding-top: 20px;
+    padding-bottom: 0px;
     margin-left: 100px;
     margin-right: 100px;
     min-width: 10px;
@@ -140,7 +170,6 @@ button.submit:hover{
 .paraAfficherSortie
 {
     padding: 20px 5px 20px 5px;
-
 }
 
 .container1sortie
@@ -208,7 +237,33 @@ button.submit:hover{
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
 
+/* Annuler Sortie */
+
+.container5sortie
+{
+    max-width: 700px;
+    min-width: 20px;
+    width: 440px;
+    font-weight: bold;
+    text-align: left;
+    max-height: 700px;
+}
+
+label, input
+{
+    display: inline-block;
+}
+
+.boutonAnnulerSortie
+{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.formulaireAnnuler {
+    display: inline-block;
 }
 
 /*profile / fiche */
