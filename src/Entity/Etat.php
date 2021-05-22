@@ -12,6 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Etat
 {
+    const CREATED = "Créée";
+    const OPEN = "Ouverte";
+    const CLOSED = "Clôturée";
+    const RUNNING = "Activité en cours";
+    const DONE = "Passée";
+    const CANCELLED = "Annulée";
+
+    const libelles = [
+            self::CREATED,
+            self::OPEN,
+            self::CLOSED,
+            self::RUNNING,
+            self::DONE,
+            self::CANCELLED
+    ];
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -47,7 +63,6 @@ class Etat
     public function setLibelle(string $libelle): self
     {
         $this->libelle = $libelle;
-
         return $this;
     }
 
@@ -59,7 +74,7 @@ class Etat
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function addSortie(Sortie $sorty): self
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties[] = $sorty;
@@ -69,7 +84,7 @@ class Etat
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): self
+    public function removeSortie(Sortie $sorty): self
     {
         if ($this->sorties->removeElement($sorty)) {
             // set the owning side to null (unless already changed)

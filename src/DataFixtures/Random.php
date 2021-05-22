@@ -21,8 +21,8 @@ abstract class Random
 
     // Sortie Entity sets
 
-    public static $sortieTypeSet = array("Fête", "Sortie", "Ballade", "Promenade", "Randonnée", "Soirée");
-    public static $lieuSet = array("Chateau Cochon", "Bar Bertie La Truie", "Forêt des Sangliers", "Salle de jeu Groink Groink", "Charcuterie Aubongras");
+    public static $sortieTypeSet = array("Fête", "Sortie Velo", "Ballade", "Promenade", "Randonnée",
+        "Soirée", "Exposition", "Concert", "Festival", "Projection", "Escalade", "Apero");
 
     public static $dummyTextSet = array(
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sint ista Graecorum; Dat enim intervalla et relaxat. Quo igitur, inquit, modo? Duo Reges: constructio interrete. Haec para/doca illi, nos admirabilia dicamus. Haec igitur Epicuri non probo, inquam.",
@@ -78,6 +78,10 @@ abstract class Random
         return (bool) rand(0,1);
     }
 
+    public static function float($min = 0, $max = 1) {
+        return $min + mt_rand() / mt_getrandmax() * ($max - $min);
+    }
+
     public static function text(): string
     {
         return implode("\n", self::randomSlice(self::$dummyTextSet));
@@ -111,13 +115,5 @@ abstract class Random
     public static function pseudo():string
     {
         return self::$ucCharSet[array_rand(self::$ucCharSet)].self::string(rand(5, 10), self::$lcCharSet);
-    }
-
-    // For Sortie Entity
-    public static function nomSortie():string
-    {
-        return self::$sortieTypeSet[array_rand(self::$sortieTypeSet)]
-            ." à ".
-            self::$lieuSet[array_rand(self::$lieuSet)];
     }
 }
