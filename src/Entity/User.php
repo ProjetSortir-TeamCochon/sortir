@@ -81,7 +81,7 @@ class User implements UserInterface
     private $username;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="user")
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="users")
      */
     private $campus;
 

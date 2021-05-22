@@ -105,8 +105,8 @@ class AppFixtures extends Fixture
             $user = $this->makeUser(false)->setCampus(Random::randomFromSet($campus));
             array_push($users, $user);
         }
-        array_push($users, $this->makeUser(true));
-        array_push($users, $this->makeUser(true));
+        array_push($users, $this->makeUser(true)->setCampus(Random::randomFromSet($campus)));
+        array_push($users, $this->makeUser(true)->setCampus(Random::randomFromSet($campus)));
 
         // Sortie
         // -> Associée à un user organisateur
@@ -171,6 +171,7 @@ class AppFixtures extends Fixture
                 rand(5,10), Random::$ucCharSet)
             )
             ->setTelephone(Random::string(10, Random::$digitSet))
+            ->setProfilePictureName("logo-eni.png")
             ->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
