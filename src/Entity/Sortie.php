@@ -87,8 +87,6 @@ class Sortie
      */
     private $organisateur;
 
-    private $etatRepository;
-
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -171,12 +169,12 @@ class Sortie
         return $this;
     }
 
-    public function getLieu(): ?Lieu
+    public function getLieu(): ?lieu
     {
         return $this->lieu;
     }
 
-    public function setLieu(?Lieu $lieu): self
+    public function setLieu(?lieu $lieu): self
     {
         $this->lieu = $lieu;
 
@@ -218,7 +216,7 @@ class Sortie
     {
         if (!$this->users->contains($user)) {
             $this->users[] = $user;
-            $user->addSorty($this);
+            $user->addSortie($this);
         }
 
         return $this;
@@ -227,7 +225,7 @@ class Sortie
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeSorty($this);
+            $user->removeSortie($this);
         }
 
         return $this;

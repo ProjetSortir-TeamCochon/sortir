@@ -101,6 +101,10 @@ class User implements UserInterface
         $this->sortiesOrganisees = new ArrayCollection();
     }
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $profilePictureName;
 
     public function getId(): ?int
     {
@@ -266,7 +270,7 @@ class User implements UserInterface
         return $this->sorties;
     }
 
-    public function addSorty(Sortie $sorty): self
+    public function addSortie(Sortie $sorty): self
     {
         if (!$this->sorties->contains($sorty)) {
             $this->sorties[] = $sorty;
@@ -275,7 +279,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeSorty(Sortie $sorty): self
+    public function removeSortie(Sortie $sorty): self
     {
         $this->sorties->removeElement($sorty);
 
@@ -310,4 +314,17 @@ class User implements UserInterface
 
         return $this;
     }
+
+    public function getProfilePictureName(): ?string
+    {
+        return $this->profilePictureName;
+    }
+
+    public function setProfilePictureName(?string $profilePictureName): self
+    {
+        $this->profilePictureName = $profilePictureName;
+
+        return $this;
+    }
+
 }

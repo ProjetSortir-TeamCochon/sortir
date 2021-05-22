@@ -21,6 +21,13 @@ li, a, button
     text-decoration: none;
 }
 
+
+h1,h2{
+    margin-top: 1em;
+    display: flex;
+    justify-content: center;
+}
+
 section
 {
     display: inline-block;
@@ -53,8 +60,6 @@ header
 {
     display: inline-block;
     padding: 0px 20px;
-
-
 }
 
 .nav_links li a
@@ -95,6 +100,7 @@ select {
 
 /*buttons*/
 button.submit{
+    color : forestgreen;
     padding: 1em 1em;
     margin-top: 1em;
     border: 1px solid forestgreen;
@@ -107,6 +113,24 @@ button.submit:hover{
     background-color: forestgreen;
 }
 
+.button_retour{
+    display: flex;
+    justify-content: center;
+}
+
+button.retour{
+    color: lightpink;
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid lightpink;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.retour:hover{
+    color: #FFFFFF;
+    background-color: lightpink;
+}
 
 /* Outputs view */
 
@@ -126,18 +150,18 @@ button.submit:hover{
 .containerSortie
 {
     text-align: center;
-
 }
-
 
 #afficherSortie
 {
     display: inline-block;
 
-
-    max-width: 300px;
+    max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
+    max-width: 700px;
+    padding-top: 20px;
+    padding-bottom: 0px;
     margin-left: 100px;
     margin-right: 100px;
     min-width: 10px;
@@ -155,7 +179,6 @@ button.submit:hover{
 .paraAfficherSortie
 {
     padding: 20px 5px 20px 5px;
-
 }
 
 .container1sortie
@@ -163,7 +186,7 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+    font-weight: bold;
     text-align: left;
     max-height: 700px;
 
@@ -173,7 +196,6 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
     text-align: right;
     max-height: 700px;
 
@@ -183,7 +205,7 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
+    font-weight: bold;
     text-align: left;
     max-height: 700px;
 }
@@ -192,7 +214,6 @@ button.submit:hover{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
-    border: solid;
     text-align: right;
     max-height: 700px;
  }
@@ -223,4 +244,63 @@ button.submit:hover{
     text-align: center;
     margin-top: 50px;
     margin-bottom: 50px;
+}
+
+/* Annuler Sortie */
+
+.container5sortie
+{
+    max-width: 700px;
+    min-width: 20px;
+    width: 440px;
+    font-weight: bold;
+    text-align: left;
+    max-height: 700px;
+}
+
+label, input
+{
+    display: inline-block;
+}
+
+.boutonAnnulerSortie
+{
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.formulaireAnnuler
+{
+    display: inline-block;
+}
+
+/* profile / fiche */
+.container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+section div{
+    margin: 1em;
+}
+
+section.button{
+    display: flex;
+    justify-content: space-around;
+}
+
+.avatar{
+    max-width: 17em;
+    border-radius: 10em;
+}
+
+.editAvatar{
+    display: flex;
+    flex-direction: column;
+    width: 20em;
+}
+
+.profileForm{
+    display: flex;
+    justify-content: center;
 }
