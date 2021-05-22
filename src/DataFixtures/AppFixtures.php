@@ -11,9 +11,20 @@ use App\Entity\Ville;
 use DateTimeInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
     /*
      * Commande pour peupler la BDD avec tout ce qui exécuté dans load()
      * > php bin/console doctrine:fixtures:load
@@ -160,7 +171,11 @@ class AppFixtures extends Fixture
                 rand(5,10), Random::$ucCharSet)
             )
             ->setTelephone(Random::string(10, Random::$digitSet))
-            ->setPassword("enienieni");
+            ->setPassword(
+                $this->passwordEncoder->encodePassword(
+                    $user,
+                    "enienieni")
+            );
 
         if(!$admin){
             $user->setRoles(['ROLE_USER']);
