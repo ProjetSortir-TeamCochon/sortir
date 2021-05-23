@@ -8,6 +8,7 @@ use App\Entity\Lieu;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Entity\Ville;
+use App\Repository\SortieRepository;
 use DateTimeInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -36,7 +37,8 @@ class AppFixtures extends Fixture
         $etats = array();
         foreach (Etat::libelles as $libelle)
         {
-            $manager->persist( (new Etat())->setLibelle($libelle) );
+            $etats[$libelle] = (new Etat())->setLibelle($libelle);
+            $manager->persist($etats[$libelle]);
         }
         $manager->flush();
 
@@ -156,6 +158,21 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+
+        // Setting the state to open on past events generated so that their state will be updated when loaded
+        // and randomly to open or created to have some events we can open to test
+        foreach ($sorties as $sortie) {
+            $today = new \DateTime();
+            if ($sortie->getDateLimiteInscription() >= $today ) {
+                $sortie->setEtat( Random::boolean() ? $etats[Etat::CREATED] : $etats[Etat::OPEN] );
+            } else {
+                $sortie->setEtat( $etats[Etat::OPEN] );
+            }
+            $manager->persist($sortie);
+        }
+
+        $manager->flush();
+
     }
 
     // USER Creation

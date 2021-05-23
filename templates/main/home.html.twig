@@ -1,11 +1,60 @@
 {% extends 'base.html.twig' %}
 
-
-
 {% block title %}Hello HomeController!
 {% endblock %}
 
 {% block body %}
 
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de la sortie</th>
+                <th>Date de la sortie</th>
+                <th>Date Limite Inscription</th>
+                <th>Places Disponibles</th>
+                <th>Statut</th>
+                {% if app.user %} <th>Inscrit.e</th> {% endif %}
+                <th>Organisateur</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.nom }}</td>
+                <td>{{ sortie.dateHeureDebut | date("d/m/Y H:i") }}</td>
+                <td>{{ sortie.dateLimiteInscription | date("d/m/Y") }}</td>
+                <td>{{ sortie.nbInscriptionsMax - sortie.users | length }} / {{ sortie.nbInscriptionsMax }}</td>
+                <td>{{ sortie.etat.libelle }}</td>
+                {% if app.user %}
+                    <td>
+                        {% if sortie in user.sorties %} X {% endif %}
+                    </td>
+                {% endif %}
+                <td>{{ sortie.organisateur.username }}</td>
+                <td>
+                    {% if app.user and app.user.id == sortie.organisateur.id %}
+                        {# @TODO ajouter le chemin pour modifier une sortie ICI #}
+                        <a href="#">Modifier</a>
+                    {% else %}
+                        <a href="{{ path('sorties_details', {'id':sortie.id}) }}">Afficher</a>
+                    {% endif %}
+
+                    {% if app.user and app.user.id == sortie.organisateur.id %}
+                        {% if sortie.etat.libelle is constant('Etat::CREATED') %}
+                            {# @TODO ajouter le chemin pour publier ICI #}
+                            - <a href="#">Publier</a>
+                        {% elseif sortie.etat.libellle is constant('Etat::DONE') or sortie.etat.libellle is constant('Etat::RUNNING')%}
+                            {# @TODO ajouter le chemin pour annuler une sortie ICI #}
+                            - <a href="#">Annuler</a>
+                        {% endif %}
+                    {# @TODO ajouter le chemin pour se desinscrire ICI #}
+                    {% elseif app.user and sortie in user.sorties %}
+                        - <a href="#">Se désister</a>
+                    {% endif %}
+
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}
