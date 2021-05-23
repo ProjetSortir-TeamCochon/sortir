@@ -2,8 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -17,6 +19,20 @@ class SortieRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Sortie::class);
+    }
+
+    public function getOpenSorties(int $pageN, int $maxResults)
+    {
+        $query = $this->createQueryBuilder('s')
+            ->join('s.etat', 'etat')
+            ->andWhere('s.dateHeureDebut >= :today')
+            ->setParameter('today', new \DateTime())
+            ->andWhere('etat.libelle <> :created')
+            ->setParameter('created', Etat::CREATED)
+            ->addOrderBy('s.dateHeureDebut', 'ASC')
+            ->setFirstResult(0 + ($pageN - 1) * $maxResults)
+            ->setMaxResults($maxResults);
+        return new Paginator($query, true);
     }
 
     // /**
