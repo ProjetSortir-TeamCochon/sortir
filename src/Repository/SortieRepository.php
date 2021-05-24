@@ -4,9 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
 /**
  * @method Sortie|null find($id, $lockMode = null, $lockVersion = null)
@@ -35,6 +37,69 @@ class SortieRepository extends ServiceEntityRepository
         return new Paginator($query, true);
     }
 
+    public function getSorties(int $pageN, int $maxResults, array $params, ?int $userId){
+        // First request
+        if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
+        $query = $this->createQueryBuilder('s');
+
+            // TODO appliquer les filtres en fonction de params
+
+            // Campus:
+            if(array_key_exists('campus', $params)){
+                $query->join('s.campus', 'c')
+                    ->andWhere('c.nom = :campus')
+                    ->setParameter('campus', $params['campus']);
+            }
+
+            // Min Date
+            if(array_key_exists('minDate', $params)){
+                $query->andWhere('s.dateHeureDebut >= :minDate')
+                    ->set('minDate', $params['minDate']);
+            }
+            // Max Date
+            if(array_key_exists('maxDate', $params)){
+                $query->andWhere('s.dateHeureDebut <= :maxDate')
+                    ->set('maxDate', $params['maxDate']);
+            }
+
+            // Additionnal filters
+            if($userId && array_key_exists('filters', $params) && sizeof($params['filters']) > 0){
+                $filters = $params['filters'];
+
+                $manager = !!array_search('manager', $filters);
+                if($manager){
+                    $query->join('s.organisateur', 'o')
+                        ->andWhere('o.id = :userId')
+                        ->setParameter('userId', $userId);
+                }
+
+                $registered = !!array_search('registered', $filters);
+                $notRegistered = !!array_search('notRegistered', $filters);
+                // if both do nothing
+                if( ($registered || $notRegistered) && !($registered && $notRegistered) ){
+                    $query->join('s.users', 'reg');
+                    if($registered){
+                        $query->andWhere('reg.id = :userId')
+                            ->setParameter("userId", $userId);
+                    }
+                    if($notRegistered) {
+                        $query->andWhere('reg.id != :userId')
+                            ->setParameter("userId", $userId);
+                    }
+                }
+
+                $past = !!array_search('past', $filters);
+                if($past){
+                    $query->andWhere('s.dateHeureDebut < :today')
+                        ->setParameter('today', new \DateTime());
+                }
+            }
+
+        // Pagination
+        $query->setFirstResult(0 + ($pageN - 1) * $maxResults)
+            ->setMaxResults($maxResults);
+        return new Paginator($query, true);
+    }
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */

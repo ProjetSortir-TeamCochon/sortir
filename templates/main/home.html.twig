@@ -1,10 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %} Sortir | Accueil {% endblock %}
 
 {% block body %}
 
+    {# ------------ SEARCH FILTERS --------------------- #}
+    <h1>Filtrer les sorties</h1>
+
+    {{ form_start(searchForm) }}
+
+        {{ form_row(searchForm.campus) }}
+        {{ form_row(searchForm.minDate) }}
+        {{ form_row(searchForm.maxDate) }}
+        {{ form_row(searchForm.filters) }}
+
+        {{ form_rest(searchForm) }}
+        <button type="submit">Rechercher</button>
+    {{ form_end(searchForm) }}
+
+    {# ------------------- SORTIES TABLE ----------------------- #}
     <table>
         <thead>
             <tr>
@@ -18,6 +32,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
+
         {% for sortie in sorties %}
             <tr>
                 <td>{{ sortie.nom }}</td>
