@@ -304,3 +304,64 @@ section.button{
     display: flex;
     justify-content: center;
 }
+
+/* home */
+a.table-link{
+    color: black;
+}
+
+/* ------------ LAYOUT --------------- */
+
+.flexline {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.flexblock {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.flexcol {
+    display: flex;
+    flex-direction: column;
+}
+
+.flexaligncenter {
+    align-items: center;
+}
+.flexspaceeven {
+    justify-content: space-evenly;
+}
+.flexjustifycenter {
+    justify-content: center;
+}
+.flexjustifyright {
+    justify-content: right;
+}
+.flexjustifyleft {
+    justify-content: left;
+}
+.flexwrap {
+    flex-wrap: wrap;
+}
+.flexnowrap {
+    flex-wrap: nowrap;
+}
+
+/* ------------ MARGINS */
+.m_1em {
+    margin: 1em;
+}
+
+.mxsl {
+    margin-left: 0.5em;
+}
+.mxst {
+    margin-top: 0.5em;
+}
+.mlt {
+    margin-top: 2em;
+}

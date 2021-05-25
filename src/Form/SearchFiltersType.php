@@ -21,11 +21,11 @@ class SearchFiltersType extends AbstractType
                 'class' => Campus::class,
                 'choice_label' => 'nom',
                 'placeholder' => 'Filtrer par campus...',
-                'label' => 'Campus',
+                'label' => 'Par Campus',
                 'required'=> false
             ])
             ->add('minDate', DateType::class, [
-                'label' => 'Entre',
+                'label' => 'Sorties entre',
                 'html5' => true,
                 'widget' => 'single_text',
                 'required' => false
@@ -37,7 +37,7 @@ class SearchFiltersType extends AbstractType
                 'required' => false
             ])
             ->add('filters', ChoiceType::class, [
-                'label' => 'Filtrer par',
+                'label' => 'Affiner ma recherche par',
                 'expanded' => true,
                 'multiple' => true,
                 'choices' => [
