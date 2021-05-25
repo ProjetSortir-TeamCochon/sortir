@@ -1,12 +1,37 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
-{% endblock %}
+{% block title %} Sortir | Accueil {% endblock %}
 
 {% block body %}
 
-    <table>
-        <thead>
+    {# ------------ SEARCH FILTERS --------------------- #}
+
+
+    {{ form_start(searchForm) }}
+        <div class="flexblock flexspaceeven">
+            <p>Filtrer les sorties</p>
+            <div class="flexline">{{ form_label(searchForm.campus) }}{{ form_widget(searchForm.campus) }}</div>
+            <div class="flexline">
+                {{ form_label(searchForm.minDate) }}{{ form_widget(searchForm.minDate) }}
+                {{ form_label(searchForm.maxDate) }}{{ form_widget(searchForm.maxDate) }}
+            </div>
+            {% if app.user %}
+                <div class="dropdown flexline">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFilters" data-bs-toggle="dropdown" aria-expanded="false">{{ form_label(searchForm.filters) }}</button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownFilters">
+                        {% for option in searchForm.filters %}
+                            <div class="flexline">{{ form_widget(option) }}{{ form_label(option) }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+            <div class="flexline"><button type="submit" class="btn btn-primary">Rechercher</button></div>
+        </div>
+    {{ form_end(searchForm) }}
+
+    {# ------------------- SORTIES TABLE ----------------------- #}
+    <table class="table table-light table-striped table-hover">
+        <thead class="table-dark">
             <tr>
                 <th>Nom de la sortie</th>
                 <th>Date de la sortie</th>
@@ -18,6 +43,7 @@
                 <th>Actions</th>
             </tr>
         </thead>
+
         {% for sortie in sorties %}
             <tr>
                 <td>{{ sortie.nom }}</td>
@@ -27,29 +53,31 @@
                 <td>{{ sortie.etat.libelle }}</td>
                 {% if app.user %}
                     <td>
-                        {% if sortie in user.sorties %} X {% endif %}
+                        {% if sortie in app.user.sorties %} X {% endif %}
                     </td>
                 {% endif %}
                 <td>{{ sortie.organisateur.username }}</td>
                 <td>
-                    {% if app.user and app.user.id == sortie.organisateur.id %}
+                    {% if sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
+                        and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
+                        and app.user and app.user.id == sortie.organisateur.id %}
                         {# @TODO ajouter le chemin pour modifier une sortie ICI #}
-                        <a href="#">Modifier</a>
+                        <a href="#" class="table-link">Modifier</a>
                     {% else %}
-                        <a href="{{ path('sorties_details', {'id':sortie.id}) }}">Afficher</a>
+                        <a href="{{ path('sorties_details', {'id':sortie.id}) }}" class="table-link">Afficher</a>
                     {% endif %}
 
                     {% if app.user and app.user.id == sortie.organisateur.id %}
-                        {% if sortie.etat.libelle is constant('Etat::CREATED') %}
+                        {% if sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
                             {# @TODO ajouter le chemin pour publier ICI #}
-                            - <a href="#">Publier</a>
-                        {% elseif sortie.etat.libellle is constant('Etat::DONE') or sortie.etat.libellle is constant('Etat::RUNNING')%}
+                            - <a href="#" class="table-link">Publier</a>
+                        {% elseif sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE') or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
                             {# @TODO ajouter le chemin pour annuler une sortie ICI #}
-                            - <a href="#">Annuler</a>
+                            - <a href="#" class="table-link">Annuler</a>
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
-                    {% elseif app.user and sortie in user.sorties %}
-                        - <a href="#">Se désister</a>
+                    {% elseif app.user and sortie in app.user.sorties %}
+                        - <a href="#" class="table-link">Se désister</a>
                     {% endif %}
 
                 </td>
