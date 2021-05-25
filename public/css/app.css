@@ -381,7 +381,7 @@ button.adminDelete:hover{
 
 table
 {
-    width: 60%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 50px;
@@ -494,4 +494,47 @@ a:visited:hover
     color: white;
     background-color: #3f4044;
     text-decoration: blink;
+}
+
+.scroll
+{
+    height: 400px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll2
+{
+    height: 200px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll3
+{
+    height: 400px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#updateTable
+{
+    width: 60%;
+}
+
+#tableCampus
+{
+    width: 100%;
 }
