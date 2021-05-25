@@ -82,6 +82,18 @@ header
     padding: 1em;
     border-radius: 10px;
     width: max-content;
+    margin: 1em 1em;
+}
+
+.flash-success{
+    color: darkgreen;
+    background-color: lightgreen;
+    font-style: italic;
+    border: 1px solid darkgreen;
+    padding: 1em;
+    border-radius: 10px;
+    width: max-content;
+    margin: 1em 1em;
 }
 
 /* forms */
@@ -156,7 +168,6 @@ button.retour:hover{
 #afficherSortie
 {
     display: inline-block;
-
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -211,13 +222,13 @@ button.retour:hover{
     max-height: 700px;
 }
 .container4sortie
- {
+{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
     text-align: right;
     max-height: 700px;
- }
+}
 
 .boutonAfficherSorties
 {
@@ -304,6 +315,62 @@ section.button{
 .profileForm{
     display: flex;
     justify-content: center;
+}
+
+/* Panneau administration */
+
+.adminTitle{
+    text-align: center;
+    color: darkred;
+    margin-top: 1em;
+}
+
+.adminList{
+    color: #3f4044;
+    margin-left: 2em;
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.adminList:hover{
+    color: #3f4044;
+}
+
+/* Administration - liste */
+
+#list{
+    margin-top: 1em;
+    width:90%;
+}
+
+button.adminDelete{
+    color: darkred;
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid darkred;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.adminDelete:hover{
+    color: #FFFFFF;
+    background-color: darkred;
+}
+
+#activer{
+    color:darkgreen;
+}
+
+#activer:hover{
+    color: darkgreen;
+}
+
+#inactiver{
+    color: darkred;
+}
+
+#inactiver:hover {
+    color: darkred;
 }
 
 /* Tableaux */
