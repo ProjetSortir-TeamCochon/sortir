@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Modifier campus
+{% endblock %}
+
+{% block body %}
+
+    <h1>Modification campus</h1>
+    <br>
+    <div class="divFiltrerVilles">
+        <div>
+            <h4>Filtrer les campus</h4>
+
+            <p>Le nom contient : </p>
+
+        </div>
+        <div class="btnRechercher">
+            {{ form_start(rechercherForm) }}
+            {{ form_widget(rechercherForm) }}
+        </div>
+        <div>
+            <button class="btnSearch">Rechercher</button>
+            {{ form_end(rechercherForm) }}
+        </div>
+
+    </div>
+    <table>
+        <tr>
+            <th>Campus</th>
+
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>{{ campus.nom }}</td>
+
+            <td class="tableauAction"><a href="{{ path('gestioncampus_effacer', {'id':campus.id}) }}"><p>Supprimer</p></a></td>
+
+        </tr>
+
+
+
+        <tr>
+            {{ form_start(campusForm) }}
+            <td> {{ form_row(campusForm.nom) }}</td>
+
+            <td><a href="{{ path('gestioncampus_liste') }}"><button class="btnGestionVilles">Modifier</button></a></td>
+
+            {{ form_end(campusForm) }}
+
+        </tr>
+
+    </table>
+
+    <div>
+
+
+
+
+
+
+    </div>
+
+{% endblock %}

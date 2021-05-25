@@ -2,7 +2,7 @@
 
 
 
-{% block title %}Liste villes
+{% block title %}Modifier villes
 {% endblock %}
 
 {% block body %}
@@ -10,9 +10,21 @@
     <h1>Gestion des villes</h1>
     <br>
     <div class="divFiltrerVilles">
-        <h4>Filtrer les villes</h4>
+        <div>
+            <h4>Filtrer les villes</h4>
 
-        <p>Le nom contient : </p>
+            <p>Le nom contient : </p>
+
+        </div>
+        <div class="btnRechercher">
+            {{ form_start(rechercherForm) }}
+            {{ form_widget(rechercherForm) }}
+        </div>
+        <div>
+            <button class="btnSearch">Rechercher</button>
+            {{ form_end(rechercherForm) }}
+        </div>
+
     </div>
     <table>
         <tr>
