@@ -65,6 +65,7 @@ header
 .nav_links li a
 {
     transition: all 0.3s ease 0s;
+    color: white;
 }
 
 .nav_links li a:hover
@@ -303,4 +304,123 @@ section.button{
 .profileForm{
     display: flex;
     justify-content: center;
+}
+
+/* Tableaux */
+
+table
+{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+th, td
+{
+    padding: 10px;
+    text-align: left;
+    border: solid 1px #ccc;
+    text-align: center;
+    font-weight: initial;
+}
+
+th
+{
+    background-color: #24252A;
+    color: #FFF;
+}
+
+tr:nth-child(odd)
+{
+    background-color: #eee;
+}
+
+.tableauAction
+{
+
+}
+
+/* Gestion villes */
+
+.divFiltrerVilles
+{
+    margin-left: 80px;
+    display: flex;
+    justify-content: initial;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btnGestionVilles
+{
+    width: 80px;
+    color: #ffffff;
+    font-size: 18px;
+    background-color: #24252A;
+    padding: 3px 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: auto;
+}
+
+.btnGestionVilles:hover
+{
+    color: white;
+    background-color: #3f4044;
+    text-decoration: blink;
+}
+
+a:link
+{
+    text-decoration: none;
+    color: black;
+}
+a:link:hover
+{
+    color: #525a5e;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+a:visited:hover
+{
+    color: #525a5e;
+}
+
+.btnRechercher
+{
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.btnSearch
+{
+    margin-top: 27px;
+    margin-left: 20px;
+    width: 100px;
+    color: #ffffff;
+    font-size: 18px;
+    background-color: #24252A;
+    padding: 3px 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+
+}
+.btnSearch:hover
+{
+    color: white;
+    background-color: #3f4044;
+    text-decoration: blink;
 }

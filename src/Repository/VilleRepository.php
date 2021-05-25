@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Ville;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -17,6 +18,13 @@ class VilleRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Ville::class);
+    }
+
+    public function findSearch(SearchData $search): array
+    {
+        $query = $this
+        ->createQueryBuilder('p');
+        return $query->getQuery()->getResult();
     }
 
     // /**
