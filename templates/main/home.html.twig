@@ -12,9 +12,10 @@
         {{ form_row(searchForm.campus) }}
         {{ form_row(searchForm.minDate) }}
         {{ form_row(searchForm.maxDate) }}
-        {{ form_row(searchForm.filters) }}
+        {% if app.user %}
+            {{ form_row(searchForm.filters) }}
+        {% endif %}
 
-        {{ form_rest(searchForm) }}
         <button type="submit">Rechercher</button>
     {{ form_end(searchForm) }}
 
@@ -42,12 +43,14 @@
                 <td>{{ sortie.etat.libelle }}</td>
                 {% if app.user %}
                     <td>
-                        {% if sortie in user.sorties %} X {% endif %}
+                        {% if sortie in app.user.sorties %} X {% endif %}
                     </td>
                 {% endif %}
                 <td>{{ sortie.organisateur.username }}</td>
                 <td>
-                    {% if app.user and app.user.id == sortie.organisateur.id %}
+                    {% if sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
+                        and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
+                        and app.user and app.user.id == sortie.organisateur.id %}
                         {# @TODO ajouter le chemin pour modifier une sortie ICI #}
                         <a href="#">Modifier</a>
                     {% else %}
@@ -55,15 +58,15 @@
                     {% endif %}
 
                     {% if app.user and app.user.id == sortie.organisateur.id %}
-                        {% if sortie.etat.libelle is constant('Etat::CREATED') %}
+                        {% if sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
                             {# @TODO ajouter le chemin pour publier ICI #}
                             - <a href="#">Publier</a>
-                        {% elseif sortie.etat.libellle is constant('Etat::DONE') or sortie.etat.libellle is constant('Etat::RUNNING')%}
+                        {% elseif sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE') or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
                             {# @TODO ajouter le chemin pour annuler une sortie ICI #}
                             - <a href="#">Annuler</a>
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
-                    {% elseif app.user and sortie in user.sorties %}
+                    {% elseif app.user and sortie in app.user.sorties %}
                         - <a href="#">Se désister</a>
                     {% endif %}
 

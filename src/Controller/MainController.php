@@ -3,8 +3,6 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Sortie;
 use App\Form\SearchFiltersType;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +30,6 @@ class MainController extends AbstractController
             $params = $request->query->get('params');
         }
         if(!$params) $params = array();
-
         $paginator = $sortieRepository->getSorties(
             $page,
             $maxResults,

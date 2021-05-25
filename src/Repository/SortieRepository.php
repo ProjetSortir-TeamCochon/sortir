@@ -6,6 +6,7 @@ use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
@@ -41,57 +42,64 @@ class SortieRepository extends ServiceEntityRepository
         // First request
         if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
         $query = $this->createQueryBuilder('s');
-
-            // TODO appliquer les filtres en fonction de params
-
+            $campus = $params['campus'];
             // Campus:
-            if(array_key_exists('campus', $params)){
+            if(!!$campus){
                 $query->join('s.campus', 'c')
                     ->andWhere('c.nom = :campus')
-                    ->setParameter('campus', $params['campus']);
+                    ->setParameter('campus', $params['campus']->getNom());
             }
 
             // Min Date
-            if(array_key_exists('minDate', $params)){
+            $minDate = $params['minDate'];
+            if(!!$minDate){
                 $query->andWhere('s.dateHeureDebut >= :minDate')
-                    ->set('minDate', $params['minDate']);
+                    ->setParameter('minDate', $params['minDate']);
             }
             // Max Date
-            if(array_key_exists('maxDate', $params)){
+            $maxDate = $params['maxDate'];
+            if(!!$maxDate){
                 $query->andWhere('s.dateHeureDebut <= :maxDate')
-                    ->set('maxDate', $params['maxDate']);
+                    ->setParameter('maxDate', $params['maxDate']);
             }
 
             // Additionnal filters
-            if($userId && array_key_exists('filters', $params) && sizeof($params['filters']) > 0){
-                $filters = $params['filters'];
+            $filters = $params['filters'];
+            $past = array_search('past', $filters) !== false;
+            if($past){
+                $query->andWhere('s.dateHeureDebut < :today')
+                    ->setParameter('today', new \DateTime())
+                    ->addOrderBy('s.dateHeureDebut', 'DESC');
+            } else {
+                $query->andWhere('s.dateHeureDebut >= :today')
+                    ->setParameter('today', new \DateTime())
+                    ->addOrderBy('s.dateHeureDebut', 'ASC');
+            }
+            if( !!$userId && $userId >= 0 && sizeof($filters) > 0){
 
-                $manager = !!array_search('manager', $filters);
+                $manager = array_search('manager', $filters) !== false;
                 if($manager){
                     $query->join('s.organisateur', 'o')
                         ->andWhere('o.id = :userId')
                         ->setParameter('userId', $userId);
                 }
 
-                $registered = !!array_search('registered', $filters);
-                $notRegistered = !!array_search('notRegistered', $filters);
+                $registered = array_search('registered', $filters) !== false;
+                $notRegistered = array_search('notRegistered', $filters) !== false;
                 // if both do nothing
                 if( ($registered || $notRegistered) && !($registered && $notRegistered) ){
-                    $query->join('s.users', 'reg');
                     if($registered){
+                        $query->join('s.users', 'reg');
                         $query->andWhere('reg.id = :userId')
-                            ->setParameter("userId", $userId);
+                        ->setParameter("userId", $userId);
                     }
                     if($notRegistered) {
-                        $query->andWhere('reg.id != :userId')
+                        $queryBis = $this->createQueryBuilder('sort')
+                                        ->join('s.users', 'reg')
+                                        ->andWhere('reg.id = :userId');
+                        $query->andWhere('s.id NOT in ('.$queryBis->getDQL().')')
                             ->setParameter("userId", $userId);
                     }
-                }
-
-                $past = !!array_search('past', $filters);
-                if($past){
-                    $query->andWhere('s.dateHeureDebut < :today')
-                        ->setParameter('today', new \DateTime());
                 }
             }
 
@@ -100,6 +108,7 @@ class SortieRepository extends ServiceEntityRepository
             ->setMaxResults($maxResults);
         return new Paginator($query, true);
     }
+
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
