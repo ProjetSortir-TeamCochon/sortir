@@ -1,4 +1,4 @@
-<a id="logoSite" href="{{ path('main_accueil') }}"><img class="logo" src="{{ asset('img/logo/logo.png') }}" alt="logo">
+<a id="logoSite" href="{{ path('main_accueil') }}"><img class="logo" src="{{ asset('img/logo/logo.png') }}" alt="logo"></a>
 <nav>
     <ul class="nav_links">
         <li><a href="{{ path('main_accueil') }}" title="Accueil">ACCUEIL</a></li>
@@ -18,7 +18,7 @@
 
         <li><a href="#" title="Villes">VILLES</a> </li>
         <li><a href="#" title="Campus">CAMPUS</a> </li>
-        <li><a href="{{ path('app_register') }}" title="nouvel élève">INSCRIPTION D'UN ELEVE</a></li>
+        <li><a href="{{ path('admin_dashboard') }}" title="Dashboard" id="adminTitle">ADMINISTRATION</a></li>
 
        {% endif %}
     </ul>

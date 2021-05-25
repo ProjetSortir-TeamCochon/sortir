@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Modifier villes
+{% endblock %}
+
+{% block body %}
+
+    <h1>Gestion des villes</h1>
+    <br>
+    <div class="divFiltrerVilles">
+        <div>
+            <h4>Filtrer les villes</h4>
+
+            <p>Le nom contient : </p>
+
+        </div>
+        <div class="btnRechercher">
+            {{ form_start(rechercherForm) }}
+            {{ form_widget(rechercherForm) }}
+        </div>
+        <div>
+            <button class="btnSearch">Rechercher</button>
+            {{ form_end(rechercherForm) }}
+        </div>
+
+    </div>
+
+    <table id="updateTable">
+        <tr>
+            <th>Ville</th>
+            <th>Code Postal</th>
+            <th>Action</th>
+        </tr>
+
+            <tr>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td class="tableauAction"><a href="{{ path('gestionvilles_effacer', {'id':ville.id}) }}"><p>Supprimer</p></a></td>
+
+            </tr>
+
+
+
+        <tr>
+            {{ form_start(villeForm) }}
+            <td> {{ form_row(villeForm.nom) }}</td>
+            <td>{{ form_row(villeForm.codePostal) }}</td>
+            <td><a href="{{ path('gestionvilles_liste') }}"><button class="btnGestionVilles">Modifier</button></a></td>
+
+            {{ form_end(villeForm) }}
+
+        </tr>
+
+    </table>
+
+    <div>
+
+
+
+
+
+
+    </div>
+
+{% endblock %}

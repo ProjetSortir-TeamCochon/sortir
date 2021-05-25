@@ -65,6 +65,7 @@ header
 .nav_links li a
 {
     transition: all 0.3s ease 0s;
+    color: white;
 }
 
 .nav_links li a:hover
@@ -81,6 +82,18 @@ header
     padding: 1em;
     border-radius: 10px;
     width: max-content;
+    margin: 1em 1em;
+}
+
+.flash-success{
+    color: darkgreen;
+    background-color: lightgreen;
+    font-style: italic;
+    border: 1px solid darkgreen;
+    padding: 1em;
+    border-radius: 10px;
+    width: max-content;
+    margin: 1em 1em;
 }
 
 /* forms */
@@ -155,7 +168,6 @@ button.retour:hover{
 #afficherSortie
 {
     display: inline-block;
-
     max-width: 350px;
     padding-top: 50px;
     padding-bottom: 50px;
@@ -210,13 +222,13 @@ button.retour:hover{
     max-height: 700px;
 }
 .container4sortie
- {
+{
     max-width: 400px;
     min-width: 20px;
     width: 220px;
     text-align: right;
     max-height: 700px;
- }
+}
 
 .boutonAfficherSorties
 {
@@ -303,6 +315,228 @@ section.button{
 .profileForm{
     display: flex;
     justify-content: center;
+}
+
+/* Panneau administration */
+
+.adminTitle{
+    text-align: center;
+    color: darkred;
+    margin-top: 1em;
+}
+
+.adminList{
+    color: #3f4044;
+    margin-left: 2em;
+    margin-top: 1em;
+    font-size: 1.5em;
+}
+
+.adminList:hover{
+    color: #3f4044;
+}
+
+/* Administration - liste */
+
+#list{
+    margin-top: 1em;
+    width:90%;
+}
+
+#adminTitle{
+    color: darkred;
+}
+
+button.adminDelete{
+    color: darkred;
+    padding: 1em 1em;
+    margin-top: 1em;
+    border: 1px solid darkred;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+}
+
+button.adminDelete:hover{
+    color: #FFFFFF;
+    background-color: darkred;
+}
+
+#activer{
+    color:darkgreen;
+}
+
+#activer:hover{
+    color: darkgreen;
+}
+
+#inactiver{
+    color: darkred;
+}
+
+#inactiver:hover {
+    color: darkred;
+}
+
+/* Tableaux */
+
+table
+{
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    border-collapse: collapse;
+}
+th, td
+{
+    padding: 10px;
+    text-align: left;
+    border: solid 1px #ccc;
+    text-align: center;
+    font-weight: initial;
+}
+
+th
+{
+    background-color: #24252A;
+    color: #FFF;
+}
+
+tr:nth-child(odd)
+{
+    background-color: #eee;
+}
+
+.tableauAction
+{
+
+}
+
+/* Gestion villes */
+
+.divFiltrerVilles
+{
+    margin-left: 80px;
+    display: flex;
+    justify-content: initial;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btnGestionVilles
+{
+    width: 80px;
+    color: #ffffff;
+    font-size: 18px;
+    background-color: #24252A;
+    padding: 3px 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 20px;
+    outline: none;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    margin: auto;
+}
+
+.btnGestionVilles:hover
+{
+    color: white;
+    background-color: #3f4044;
+    text-decoration: blink;
+}
+
+a:link
+{
+    text-decoration: none;
+    color: black;
+}
+a:link:hover
+{
+    color: #525a5e;
+}
+
+a:visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+a:visited:hover
+{
+    color: #525a5e;
+}
+
+.btnRechercher
+{
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+.btnSearch
+{
+    margin-top: 27px;
+    margin-left: 20px;
+    width: 100px;
+    color: #ffffff;
+    font-size: 18px;
+    background-color: #24252A;
+    padding: 3px 0;
+    cursor: pointer;
+    border: 0;
+    border-radius: 5px;
+    outline: none;
+
+}
+.btnSearch:hover
+{
+    color: white;
+    background-color: #3f4044;
+    text-decoration: blink;
+}
+
+.scroll
+{
+    height: 400px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll2
+{
+    height: 200px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroll3
+{
+    height: 400px;
+    min-height: 100px;
+    max-height: 800px;
+    overflow: scroll;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#updateTable
+{
+    width: 60%;
+}
+
+#tableCampus
+{
+    width: 100%;
 }
 
 /* home */

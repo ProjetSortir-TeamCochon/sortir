@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Effacer campus
+{% endblock %}
+
+{% block body %}
+
+<h1>Suppression campus</h1>
+<br>
+<div class="divFiltrerVilles">
+    <h4>Filtrer les villes</h4>
+
+    <p>Le nom contient : </p>
+</div>
+<div class="scroll">
+<table>
+    <tr>
+        <th>campus</th>
+  h>
+        <th>Action</th>
+    </tr>
+
+    <tr>
+        <td>{{ campus.nom }}</td>
+        <td><a href="{{ path('gestioncampus_liste') }}"><button class="btnGestionVilles">Supprimer</button></a></td>
+
+    </tr>
+
+
+
+
+
+</table>
+</div>
+

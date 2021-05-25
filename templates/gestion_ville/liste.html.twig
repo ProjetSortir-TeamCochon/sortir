@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Liste villes
+{% endblock %}
+
+{% block body %}
+
+    <h1>Gestion des villes</h1>
+    <br>
+    <div class="divFiltrerVilles">
+        <div>
+        <h4>Filtrer les villes</h4>
+
+         <p>Le nom contient : </p>
+
+        </div>
+        <div class="btnRechercher">
+            {{ form_start(rechercherForm) }}
+            {{ form_widget(rechercherForm) }}
+        </div>
+        <div>
+            <button class="btnSearch">Rechercher</button>
+            {{ form_end(rechercherForm) }}
+        </div>
+
+    </div>
+    <div class="scroll">
+    <table>
+        <tr>
+            <th>Ville</th>
+            <th>Code Postal</th>
+            <th>Action</th>
+        </tr>
+        {% for ville in villes %}
+            <tr>
+                <td>{{ ville.nom }}</td>
+                <td>{{ ville.codePostal }}</td>
+                <td class="tableauAction"><p><a href="{{ path('gestionvilles_modifier', {'id':ville.id}) }}" class="lienGestionville"> Modifier</a> - <a href="{{ path('gestionvilles_effacer', {'id':ville.id}) }}">Supprimer</a></p></td>
+
+            </tr>
+
+        {% endfor %}
+
+            <tr>
+                {{ form_start(villesForm) }}
+                <td> {{ form_row(villesForm.nom) }}</td>
+                <td>{{ form_row(villesForm.codePostal) }}</td>
+                <td><a href="{{ path('gestionvilles_liste') }}"><button class="btnGestionVilles">Ajouter</button></a></td>
+
+                {{ form_end(villesForm) }}
+
+            </tr>
+
+    </table>
+    </div>
+    <div>
+
+
+
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block title %}Effacer villes
+{% endblock %}
+
+{% block body %}
+
+    <h1>Suppression villes</h1>
+    <br>
+    <div class="divFiltrerVilles">
+        <h4>Filtrer les villes</h4>
+
+        <p>Le nom contient : </p>
+    </div>
+    <div class="scroll">
+    <table>
+        <tr>
+            <th>Ville</th>
+            <th>Code Postal</th>
+            <th>Action</th>
+        </tr>
+
+        <tr>
+            <td>{{ ville.nom }}</td>
+            <td>{{ ville.codePostal }}</td>
+            <td><a href="{{ path('gestionvilles_liste') }}"><button class="btnGestionVilles">Supprimer</button></a></td>
+
+        </tr>
+
+
+
+
+
+    </table>
+    </div>
+    <div>
+
+
+
+
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs | {{ parent() }}{% endblock %}
+
+{% block body %}
+
+    <h4 class="adminTitle">Liste des utilisateurs</h4>
+
+    <div class="container">
+
+    <table id="list">
+        <tr>
+            <td>SUPPRESSION</td>
+            <td>NOM</td>
+            <td>PRÉNOM</td>
+            <td>ADRESSE MAIL</td>
+            <td>TÉLÉPHONE</td>
+            <td>ÉTAT</td>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>
+                    <a href="{{ path('admin_delete', {'id': user.id}) }}" title="suppression">&#10060</a>
+                </td>
+                <td>{{ user.nom }}</td>
+                <td>{{ user.prenom }}</td>
+                <td>{{ user.mail }}</td>
+                <td>{{ user.telephone }}</td>
+                <td>
+                    {% if user.actif == 1 %}
+                        Actif - <a href="{{ path('admin_desactivate', {'id':user.id}) }}" title="Inactiver" id="inactiver">&#128308 Inactiver</a>
+                    {% else %}
+                        Inactif - <a href="{{ path('admin_activate',{'id':user.id}) }}" title="Activer" id="activer">&#128994 Activer</a>
+                    {% endif%}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    </div>
+    
+    <section class="container">
+        <a href="{{ path('admin_dashboard') }}" title="retour"><button class="retour">Retour</button></a>
+    </section>
+
+{% endblock %}
