@@ -66,7 +66,7 @@ class GestionVilleController extends AbstractController
 
         $ville = $villeRepository->find($id);
 
-
+        $dataForm = $this->createForm(RechercherFormType::class);
         $villeForm = $this->createForm(GestionVilleType::class, $ville);
 
         $villeForm->handleRequest($request);
@@ -85,7 +85,8 @@ class GestionVilleController extends AbstractController
 
         return $this->render('gestion_ville/modifier.html.twig', [
             "ville" => $ville,
-            "villeForm" => $villeForm->createView()
+            "villeForm" => $villeForm->createView(),
+            "rechercherForm" => $dataForm->createView()
         ]);
     }
 
