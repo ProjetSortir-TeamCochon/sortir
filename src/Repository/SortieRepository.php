@@ -46,6 +46,7 @@ class SortieRepository extends ServiceEntityRepository
     public function getSorties(int $pageN, int $maxResults, array $params, ?int $userId){
         // First request
         if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
+
         $query = $this->createQueryBuilder('s');
             $campus = array_key_exists('campus', $params) ? $params['campus'] : false;
             // Campus:

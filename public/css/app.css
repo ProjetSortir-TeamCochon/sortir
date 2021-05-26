@@ -526,6 +526,9 @@ a:visited:hover
 }
 
 /* home */
+div.hidden {
+    display:none;
+}
 a.table-link{
     color: black;
 }
