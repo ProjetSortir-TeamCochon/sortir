@@ -68,18 +68,22 @@ class SortieRepository extends ServiceEntityRepository
                 $query->andWhere('s.dateHeureDebut <= :maxDate')
                     ->setParameter('maxDate', $params['maxDate']);
             }
-
             // Additionnal filters
             $filters = array_key_exists('filters', $params) ? $params['filters'] : false;
-            $past = array_search('past', $filters) !== false;
-            if($past){
-                $query->andWhere('s.dateHeureDebut < :today')
-                    ->setParameter('today', new \DateTime())
-                    ->addOrderBy('s.dateHeureDebut', 'DESC');
+            // @TODO Fix overlapse between dates and past conditions
+            if(!$minDate && !$maxDate){
+                $past = array_search('past', $filters) !== false;
+                if($past){
+                    $query->andWhere('s.dateHeureDebut < :today')
+                        ->setParameter('today', new \DateTime())
+                        ->addOrderBy('s.dateHeureDebut', 'DESC');
+                } else {
+                    $query->andWhere('s.dateHeureDebut >= :today')
+                        ->setParameter('today', new \DateTime())
+                        ->addOrderBy('s.dateHeureDebut', 'ASC');
+                }
             } else {
-                $query->andWhere('s.dateHeureDebut >= :today')
-                    ->setParameter('today', new \DateTime())
-                    ->addOrderBy('s.dateHeureDebut', 'ASC');
+                $query->addOrderBy('s.dateHeureDebut', 'ASC');
             }
             if( !!$userId && $userId >= 0 && sizeof($filters) > 0){
 

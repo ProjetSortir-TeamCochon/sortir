@@ -3,14 +3,14 @@
 namespace App\Form;
 
 use App\Entity\Campus;
-use phpDocumentor\Reflection\DocBlock\Tags\Return_;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use function Sodium\add;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use Symfony\Component\Validator\Constraints\Range;
 
 class SearchFiltersType extends AbstractType
 {
@@ -28,13 +28,29 @@ class SearchFiltersType extends AbstractType
                 'label' => 'Sorties entre',
                 'html5' => true,
                 'widget' => 'single_text',
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new Range([
+                        'min' => (new \DateTime())->sub(new \DateInterval('P1M')),
+                        'max' => '+1 year',
+                        'minMessage' => "Impossible de rechercher les sorties datant de plus d'un mois.",
+                        'maxMessage' => "Impossible de rechercher les sorties datant de plus d'un mois.",
+                    ])
+                ]
             ])
             ->add('maxDate', DateType::class, [
                 'label' => 'et',
                 'html5' => true,
                 'widget' => 'single_text',
-                'required' => false
+                'required' => false,
+                'constraints' => [
+                    new Range([
+                        'min' => (new \DateTime())->sub(new \DateInterval('P1M')),
+                        'max' => '+1 year',
+                        'minMessage' => "Impossible de rechercher les sorties datant de plus d'un mois.",
+                        'maxMessage' => "Impossible de rechercher les sorties datant de plus d'un mois.",
+                    ])
+                ]
             ])
             ->add('filters', ChoiceType::class, [
                 'label' => 'Affiner ma recherche par',
