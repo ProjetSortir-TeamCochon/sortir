@@ -55,7 +55,11 @@
                 <td>{{ sortie.etat.libelle }}</td>
                 {% if app.user %}
                     <td>
-                        {% if sortie in app.user.sorties %} X {% endif %}
+                        {% if sortie in app.user.sorties %}
+                            <img src="../public/img/icon/carrevert.png" class="inscriptionDesistement"/>
+                        {% else %}
+                            <img src="../public/img/icon/carrerouge.jpg" class="inscriptionDesistement"/>
+                        {% endif %}
                     </td>
                 {% endif %}
                 <td><a href="{{ path('profile_user', {'id':sortie.organisateur.id}) }}" title="Visiter le profil">{{ sortie.organisateur.username }}</a></td>
