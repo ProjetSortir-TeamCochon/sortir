@@ -71,8 +71,10 @@
                         {% if sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
                             {# @TODO ajouter le chemin pour publier ICI #}
                             - <a href="#" class="table-link">Publier</a>
-                        {% elseif sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE') or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
+                        {% elseif sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
+                            or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
                             {# @TODO ajouter le chemin pour annuler une sortie ICI #}
+                            {# @TODO filtrer pour sorties passees #}
                             - <a href="#" class="table-link">Annuler</a>
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
@@ -84,5 +86,32 @@
             </tr>
         {% endfor %}
     </table>
-
+    <nav class="flexline flexspaceeven">
+        <ul class='pagination'>
+            <li class="page-item">
+                <a href="{{ path('main_accueil',
+                    { page: page > 1 ? page - 1 : 1, params: params, maxResults: maxResults })
+                    }}"
+                   title="Page Précédente" class="page-link{{ page == 1 ? ' disabled' : '' }}">
+                    Précédente
+                </a>
+            </li>
+            {% for i in 1..maxPages %}
+                <li class="page-item">
+                    <a href="{{ path('main_accueil', { page: i, params: params, maxResults: maxResults }) }}"
+                       class="page-link{{ page == i ? ' active' : ' disabled' }}">
+                        {{ i }}
+                    </a>
+                </li>
+            {% endfor %}
+            <li class="page-item">
+                <a href="{{ path('main_accueil',
+                    { page: page < maxPages ? page + 1 : maxPages, params: params, maxResults: maxResults })
+                    }}"
+                   title="Page Suivante" class="page-link{{ page == maxPages ? ' disabled' : '' }}">
+                    Suivante
+                </a>
+            </li>
+        </ul>
+    </nav>
 {% endblock %}

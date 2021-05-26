@@ -32,17 +32,22 @@ class SortieRepository extends ServiceEntityRepository
             ->setParameter('today', new \DateTime())
             ->andWhere('etat.libelle <> :created')
             ->setParameter('created', Etat::CREATED)
-            ->addOrderBy('s.dateHeureDebut', 'ASC')
-            ->setFirstResult(0 + ($pageN - 1) * $maxResults)
+            ->addOrderBy('s.dateHeureDebut', 'ASC');
+
+        // Pagination
+        $query->getQuery();
+        $paginator = new Paginator($query);
+        $paginator->getQuery()
+            ->setFirstResult(($pageN - 1) * $maxResults)
             ->setMaxResults($maxResults);
-        return new Paginator($query, true);
+        return $paginator;
     }
 
     public function getSorties(int $pageN, int $maxResults, array $params, ?int $userId){
         // First request
         if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
         $query = $this->createQueryBuilder('s');
-            $campus = $params['campus'];
+            $campus = array_key_exists('campus', $params) ? $params['campus'] : false;
             // Campus:
             if(!!$campus){
                 $query->join('s.campus', 'c')
@@ -51,20 +56,20 @@ class SortieRepository extends ServiceEntityRepository
             }
 
             // Min Date
-            $minDate = $params['minDate'];
+            $minDate = array_key_exists('minDate', $params) ? $params['minDate'] : false;
             if(!!$minDate){
                 $query->andWhere('s.dateHeureDebut >= :minDate')
                     ->setParameter('minDate', $params['minDate']);
             }
             // Max Date
-            $maxDate = $params['maxDate'];
+            $maxDate = array_key_exists('maxDate', $params) ? $params['maxDate'] : false;
             if(!!$maxDate){
                 $query->andWhere('s.dateHeureDebut <= :maxDate')
                     ->setParameter('maxDate', $params['maxDate']);
             }
 
             // Additionnal filters
-            $filters = $params['filters'];
+            $filters = array_key_exists('filters', $params) ? $params['filters'] : false;
             $past = array_search('past', $filters) !== false;
             if($past){
                 $query->andWhere('s.dateHeureDebut < :today')
@@ -104,9 +109,12 @@ class SortieRepository extends ServiceEntityRepository
             }
 
         // Pagination
-        $query->setFirstResult(0 + ($pageN - 1) * $maxResults)
+        $query->getQuery();
+        $paginator = new Paginator($query);
+        $paginator->getQuery()
+            ->setFirstResult(($pageN - 1) * $maxResults)
             ->setMaxResults($maxResults);
-        return new Paginator($query, true);
+        return $paginator;
     }
 
     // /**

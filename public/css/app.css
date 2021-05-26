@@ -544,6 +544,13 @@ a.table-link{
     color: black;
 }
 
+a.page-link.active {
+    border: 1px #5eb5e0;
+}
+a.page-link.disabled{
+    background-color: #cccccc;
+    opacity: 50%;
+}
 /* ------------ LAYOUT --------------- */
 
 .flexline {

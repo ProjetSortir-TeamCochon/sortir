@@ -8,6 +8,7 @@ use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use function Symfony\Component\DependencyInjection\Loader\Configurator\param;
 
 class MainController extends AbstractController
 {
@@ -40,6 +41,7 @@ class MainController extends AbstractController
         return $this->render('main/home.html.twig', [
             'page' => $page,
             'maxResults' => $maxResults,
+            'maxPages' => ceil($paginator->count() / $maxResults),
             'sorties' => $paginator,
             'searchForm' => $searchForm->createView(),
             'params' => $params
