@@ -10,7 +10,6 @@ use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -40,7 +39,7 @@ class GestionCampusController extends AbstractController
             $entityManager->persist($newCampus);
             $entityManager->flush();
 
-            $this->addFlash('succes', 'Campus correctement ajouté');
+            $this->addFlash('success', 'Campus correctement ajouté !');
             return $this->redirectToRoute('gestioncampus_liste');
         }
 
@@ -68,7 +67,7 @@ class GestionCampusController extends AbstractController
             $entityManager->persist($campus);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Campus correctement modifié');
+            $this->addFlash('success', 'Campus correctement modifié !');
             return $this->redirectToRoute('gestioncampus_liste');
         }
 
@@ -84,20 +83,13 @@ class GestionCampusController extends AbstractController
      * @Route("/effacer/{id}", name="effacer")
      */
     public function delete(Campus $campus, EntityManagerInterface $entityManager)
-    {$dataForm = $this->createForm(RechercherFormType::class);
+    {
+        $dataForm = $this->createForm(RechercherFormType::class);
         $entityManager->remove($campus);
         $entityManager->flush();
         $this->addFlash('success', 'Campus correctement supprimé');
         return $this->redirectToRoute('gestioncampus_liste');
 
-
-        return $this->render('gestion_campus/effacer.html.twig', [
-            "rechercherForm" => $dataForm->createView()
-        ]);
     }
-
-
-
-
 
 }

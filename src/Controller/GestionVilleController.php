@@ -8,11 +8,8 @@ use App\Form\GestionVilleType;
 use App\Form\RechercherFormType;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
-
-use phpDocumentor\Reflection\Types\This;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -101,10 +98,6 @@ class GestionVilleController extends AbstractController
         $this->addFlash('success', 'Ville correctement supprimée');
         return $this->redirectToRoute('gestionvilles_liste');
 
-
-        return $this->render('gestion_ville/effacer.html.twig', [
-
-        ]);
     }
 
 }

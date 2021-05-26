@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Sortir | Accueil {% endblock %}
+{% block title %} Accueil | {{ parent() }} {% endblock %}
 
 {% block body %}
 
     {# ------------ SEARCH FILTERS --------------------- #}
 
-
+    <div class="padding">
     {{ form_start(searchForm) }}
         <div class="flexblock flexspaceeven">
             <p>Filtrer les sorties</p>
@@ -24,10 +24,12 @@
                     </div>
                 </div>
 
-            <div class="flexline"><button type="submit" class="btn btn-primary">Rechercher</button></div>
+            <div class="flexline"><button type="submit" class="btn btn-dark">Rechercher</button></div>
         </div>
     {{ form_errors(searchForm) }}
     {{ form_end(searchForm) }}
+    </div>
+
 
     {# ------------------- SORTIES TABLE ----------------------- #}
     <table class="table table-light table-striped table-hover">
@@ -56,7 +58,7 @@
                         {% if sortie in app.user.sorties %} X {% endif %}
                     </td>
                 {% endif %}
-                <td>{{ sortie.organisateur.username }}</td>
+                <td><a href="{{ path('profile_user', {'id':sortie.organisateur.id}) }}" title="Visiter le profil">{{ sortie.organisateur.username }}</a></td>
                 <td>
                     {% if sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
                         and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
@@ -114,4 +116,9 @@
             </li>
         </ul>
     </nav>
+
+    <section class="container">
+        <a href="{{ path('sortie_create') }}" title="Créer une sortie"><button class="btn btn-success">Créer une sortie</button></a>
+    </section>
+
 {% endblock %}

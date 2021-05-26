@@ -5,8 +5,7 @@
 
         {% if app.user %}
 
-            <li><a href="{{ path('app_logout') }}" title="se déconnecter">SE DÉCONNECTER</a></li>
-            <li><a href="{{ path('profile', {'id':app.user.id}) }}" title="mon profil">MON PROFIL</a></li>
+            <li><a href="{{ path('profile_edit', {'id':app.user.id}) }}" title="mon profil">MON PROFIL</a></li>
 
         {% else %}
 
@@ -16,10 +15,17 @@
 
         {% if is_granted('ROLE_ADMIN') %}
 
-        <li><a href="#" title="Villes">VILLES</a> </li>
-        <li><a href="#" title="Campus">CAMPUS</a> </li>
+        <li><a href="{{ path('gestionvilles_liste') }}" title="Villes">VILLES</a> </li>
+        <li><a href="{{ path('gestioncampus_liste') }}" title="Campus">CAMPUS</a> </li>
         <li><a href="{{ path('admin_dashboard') }}" title="Dashboard" id="adminTitle">ADMINISTRATION</a></li>
 
-       {% endif %}
+        {% endif %}
+
+        {% if app.user %}
+
+        <li><a href="{{ path('app_logout') }}" title="se déconnecter">SE DÉCONNECTER</a></li>
+
+        {% endif %}
+
     </ul>
 </nav>

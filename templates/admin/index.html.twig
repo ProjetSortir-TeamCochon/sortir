@@ -6,8 +6,7 @@
 
     <h3 class="adminTitle">Vous êtes connectés sur le compte administrateur {{ app.user.prenom }} {{ app.user.nom|upper}}.</h3>
     <br>
-    <p><a href="{{ path('app_register') }}" title="nouvel élève" class="adminList">Inscription d'un nouvel élève</a></p>
+    <p><a href="{{ path('admin_inscription') }}" title="nouvel élève" class="adminList">Inscription d'un nouvel élève</a></p>
     <p><a href="{{ path('admin_list') }}" title="liste utilisateur" class="adminList">Voir la liste des utilisateurs</a></p>
-
 
 {% endblock %}

@@ -3,8 +3,6 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Form\AnnulerSortieType;
 use App\Repository\EtatRepository;
