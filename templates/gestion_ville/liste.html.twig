@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
-
-
-{% block title %}Liste villes
-{% endblock %}
+{% block title %}Villes | {{ parent() }}{% endblock %}
 
 {% block body %}
 
@@ -12,16 +9,14 @@
     <div class="divFiltrerVilles">
         <div>
         <h4>Filtrer les villes</h4>
-
          <p>Le nom contient : </p>
-
         </div>
-        <div class="btnRechercher">
+        <div class="inputRechercher">
             {{ form_start(rechercherForm) }}
             {{ form_widget(rechercherForm) }}
         </div>
-        <div>
-            <button class="btnSearch">Rechercher</button>
+        <div class="marginAuto">
+            <button class="btn btn-dark">Rechercher</button>
             {{ form_end(rechercherForm) }}
         </div>
 
@@ -45,23 +40,15 @@
 
             <tr>
                 {{ form_start(villesForm) }}
-                <td> {{ form_row(villesForm.nom) }}</td>
-                <td>{{ form_row(villesForm.codePostal) }}</td>
-                <td><a href="{{ path('gestionvilles_liste') }}"><button class="btnGestionVilles">Ajouter</button></a></td>
+                <td><div class="flexCenter"> {{ form_row(villesForm.nom) }} </div></td>
+                <td><div class="flexCenter">{{ form_row(villesForm.codePostal) }} </div></td>
+                <td><a href="{{ path('gestionvilles_liste') }}"><button class="btn btn-success">Ajouter</button></a></td>
 
                 {{ form_end(villesForm) }}
 
             </tr>
 
     </table>
-    </div>
-    <div>
-
-
-
-
-
-
     </div>
 
 {% endblock %}

@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Form\UploadAvatarForm;
 use App\Repository\UserRepository;
-use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,48 +14,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 
-class RegistrationController extends AbstractController
+/**
+ * @Route("/profile", name="profile_")
+ */
+class ProfileUserController extends AbstractController
 {
     /**
-     * @Route("/admin/register", name="app_register")
-     */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, GuardAuthenticatorHandler $guardHandler, AppAuthenticator $authenticator): Response
-    {
-        $user = new User();
-        $user->setRoles(["ROLE_USER"]);
-        $user->setAdministrateur(0);
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            );
-
-            $this->addFlash('success', 'Un nouvel élève a été ajouté !');
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin_dashboard');
-        }
-
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
-    }
-
-
-    /**
-     * @Route ("/profile/{id}", name="profile")
+     * @Route ("/edit/{id}", name="edit")
      */
     public function editProfile(
         User $user,
@@ -87,7 +53,7 @@ class RegistrationController extends AbstractController
 
             $this->addFlash('success', 'Votre profil a été édité avec succès !');
 
-            return $this->redirectToRoute('profile', [
+            return $this->redirectToRoute('profile_edit', [
                 'id' => $user->getId()
             ]);
         }
@@ -100,7 +66,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("profile/avatar/upload/{id}", name="profile_picture")
+     * @Route("/avatar/upload/{id}", name="edit_avatar")
      */
     public function upload(Request $request, User $user, EntityManagerInterface $entityManager)
     {
@@ -122,13 +88,13 @@ class RegistrationController extends AbstractController
         $user->setProfilePictureName($newFilename);
         $entityManager->flush();
 
-        return $this->redirectToRoute('profile', [
+        return $this->redirectToRoute('profile_edit', [
             'id' => $user->getId()
         ]);
     }
 
     /**
-     * @Route ("/profile/fiche/{id}", name="fiche")
+     * @Route ("/user/{id}", name="user")
      */
     public function fiche(int $id, UserRepository $userRepository): Response
     {
