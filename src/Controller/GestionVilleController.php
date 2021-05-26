@@ -70,7 +70,7 @@ class GestionVilleController extends AbstractController
 
 
 
-        if($villeForm->isSubmitted())
+        if($villeForm->isSubmitted() && $villeForm->isValid())
         {
             $entityManager->persist($ville);
             $entityManager->flush();

@@ -53,6 +53,8 @@ class Sortie
     private $nbInscriptionsMax;
 
     /**
+     * @Assert\NotBlank(message="Veuillez inserez une description")
+     * @Assert\Length(max=50)
      * @ORM\Column(type="text")
      */
     private $infosSortie;

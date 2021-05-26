@@ -81,9 +81,14 @@
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
                     {% elseif app.user and sortie in app.user.sorties %}
-                        - <a href="#" class="table-link">Se désister</a>
+                        - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link">Se désister</a>
                     {% endif %}
 
+                    {% if sortie not in app.user.sorties %}
+
+                    <a href="{{ path('sorties_inscription', {'id':sortie.id}) }}">- Inscription</a>
+
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
