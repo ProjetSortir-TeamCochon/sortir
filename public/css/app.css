@@ -347,20 +347,6 @@ section.button{
     color: darkred;
 }
 
-button.adminDelete{
-    color: darkred;
-    padding: 1em 1em;
-    margin-top: 1em;
-    border: 1px solid darkred;
-    transition-duration: 0.4s;
-    border-radius: 15px;
-}
-
-button.adminDelete:hover{
-    color: #FFFFFF;
-    background-color: darkred;
-}
-
 #activer{
     color:darkgreen;
 }
