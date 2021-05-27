@@ -64,7 +64,7 @@ class SortieRepository extends ServiceEntityRepository
 
             // Additionnal filters
             $filters = array_key_exists('filters', $params) ? $params['filters'] : [];
-            // @TODO Fix overlapse between dates and past conditions
+
             $past = array_search('past', $filters) !== false ;
 
             $today = new DateTime();
@@ -77,31 +77,11 @@ class SortieRepository extends ServiceEntityRepository
             } else {
 
                 // Date Filtering
-                if(!!$maxDate || !!$minDate){
-//
-//                    if(!!$minDate && !!$maxDate && $minDate > $maxDate){
-//                        $temp = $minDate;
-//                        $minDate = $maxDate;
-//                        $maxDate = $temp;
-//                    }
-//
-//                    $aMonth = (new DateTime())->sub(new \DateInterval("P1M"));
-//
-//                    if(!$minDate && $maxDate > $today){
-//                        $minDate = $today;
-//                    } else if(!$minDate && $maxDate < $today){
-//                        $minDate = $aMonth;
-//                    }
-
-                    if(!!$maxDate){
-                        $query = $this->filterMaxDate($query, $maxDate);
-                    }
-                    if(!!$minDate){
-                        // Default one month before today
-//                        $minDate = $minDate < $aMonth ? $aMonth : $minDate;
-
-                        $query = $this->filterMinDate($query, $minDate);
-                    }
+                if(!!$maxDate){
+                    $query = $this->filterMaxDate($query, $maxDate);
+                }
+                if(!!$minDate){
+                    $query = $this->filterMinDate($query, $minDate);
                 }
 
                 if($past){
@@ -111,8 +91,6 @@ class SortieRepository extends ServiceEntityRepository
                     $query->addOrderBy('s.dateHeureDebut', 'ASC');
                 }
             }
-
-//        dd($params, $minDate, $today, $aMonth, $maxDate);
 
             if( !!$userId && $userId >= 0 && sizeof($filters) > 0){
                 $manager = array_search('manager', $filters) !== false;

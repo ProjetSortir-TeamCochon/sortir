@@ -17,10 +17,12 @@ li, a, button
     font-family: Lato, serif;
     font-weight: 500;
     font-size: 16px;
-    color: #edf0f1;
     text-decoration: none;
 }
 
+a, button {
+    color: #edf0f1;
+}
 
 h1,h2{
     margin-top: 1em;
