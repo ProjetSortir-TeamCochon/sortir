@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oops ... | {{ parent() }}{% endblock %}
+
+    <h2>Oops, une erreur inattendue est survenue !</h2>
+
+    <img src="{{ asset('img/errorBackground/cat500.png') }}" alt="cat500" class="errorBackground">
+    <br>
+    <a href="{{ path('main_accueil') }}" class="container"><button type="button" class="btn btn-secondary">Retour à l'accueil</button></a>
+
+{% block body %}
+
+{% endblock %}
