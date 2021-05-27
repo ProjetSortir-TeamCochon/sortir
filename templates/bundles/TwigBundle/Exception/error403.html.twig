@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Oops ... | {{ parent() }}{% endblock %}
+
+{% block body %}
+    
+<h2>Oops, vous n'avez pas les droits pour accéder à cette page !</h2>
+    <br>
+    <img src="{{ asset('img/errorBackground/gandalf.gif') }}" alt="gandalf" class="errorBackground">
+    <br>
+<a href="{{ path('main_accueil') }}" class="container"><button type="button" class="btn btn-secondary">Retour à l'accueil</button></a>
+
+{% endblock %}
