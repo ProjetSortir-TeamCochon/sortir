@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/gestioncampus", name="gestioncampus_")
+ * @Route("/admin/gestioncampus", name="gestioncampus_")
  */
 class GestionCampusController extends AbstractController
 {

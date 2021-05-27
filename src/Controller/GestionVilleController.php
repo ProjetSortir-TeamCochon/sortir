@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/gestionville", name="gestionvilles_")
+ * @Route("/admin/gestionville", name="gestionvilles_")
  */
 class GestionVilleController extends AbstractController
 {
