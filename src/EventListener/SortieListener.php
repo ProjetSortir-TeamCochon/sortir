@@ -14,6 +14,7 @@ class SortieListener
 
     public $entityManager;
 
+
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
@@ -30,7 +31,7 @@ class SortieListener
     {
         $current = $sortie->getEtat()->getLibelle();
 
-        if($current != Etat::CANCELLED || $current != Etat::CREATED){
+        if($current != Etat::CANCELLED && $current != Etat::CREATED){
 
             $today = new \DateTime();
             $etat = null;
@@ -64,7 +65,11 @@ class SortieListener
                 }
             }
 
-            if($etat) $sortie->setEtat($etat);
+            if($etat) {
+                $sortie->setEtat($etat);
+                $this->entityManager->persist($sortie);
+                $this->entityManager->flush();
+            }
         }
 
     }
