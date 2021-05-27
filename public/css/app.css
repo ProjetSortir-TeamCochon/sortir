@@ -290,6 +290,34 @@ a:visited:hover
     color: #525a5e;
 }
 
+.text-green
+{
+    background-color: #51ce6d;
+    background: rgba(0,255,0,0.2);
+    color: #000000;
+}
+
+.text-red
+{
+    background-color: #d22f35;
+    background: rgba(255,0,0,0.2);
+    color: #000000;
+}
+
+.text-orange
+{
+    background-color: #b18436;
+    background: rgba(255,165,0,0.2);
+    color: #000000;
+}
+
+.text-blue
+{
+    background-color: #398aa3;
+    background: rgba(0,191,255,0.2);
+    color: #000000;
+}
+
 .scroll
 {
     margin: 2em auto;
@@ -310,6 +338,19 @@ a:visited:hover
     margin-left: auto;
 }
 
+.text-dark
+{
+    background-color: #090909;
+    background: rgba(0,0,0,0.2);
+    color: #000000;
+}
+
+.text-purple
+{
+    background-color: #853bc6;
+    background: rgba(147,112,219,0.2);
+    color: #000000;
+}
 
 #updateTable
 {
