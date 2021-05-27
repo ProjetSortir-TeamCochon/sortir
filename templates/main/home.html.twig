@@ -8,6 +8,11 @@
 
 
     {{ form_start(searchForm) }}
+        {% if form_errors(searchForm.minDate) or form_errors(searchForm.maxDate) %}
+            <div class="flexline alert-danger my-alert-warning flexspaceeven" role="alert">
+                {{ form_errors(searchForm.minDate) }}{{ form_errors(searchForm.maxDate) }}
+            </div>
+        {% endif %}
         <div class="flexblock flexspaceeven">
             <p>Filtrer les sorties</p>
             <div class="flexline">{{ form_label(searchForm.campus) }}{{ form_widget(searchForm.campus) }}</div>
@@ -16,7 +21,11 @@
                 {{ form_label(searchForm.maxDate) }}{{ form_widget(searchForm.maxDate) }}
             </div>
                 <div class="dropdown flexline {% if not app.user %} disabled hidden{% endif %}">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFilters" data-bs-toggle="dropdown" aria-expanded="false">{{ form_label(searchForm.filters) }}</button>
+                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                            id="dropdownFilters" data-bs-toggle="dropdown" aria-expanded="false"
+                            >
+                        {{ form_label(searchForm.filters) }}
+                    </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownFilters">
                         {% for option in searchForm.filters %}
                             <div class="flexline">{{ form_widget(option) }}{{ form_label(option) }}</div>
@@ -26,7 +35,6 @@
 
             <div class="flexline"><button type="submit" class="btn btn-primary">Rechercher</button></div>
         </div>
-    {{ form_errors(searchForm) }}
     {{ form_end(searchForm) }}
 
     {# ------------------- SORTIES TABLE ----------------------- #}

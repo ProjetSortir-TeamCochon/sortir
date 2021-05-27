@@ -3,18 +3,18 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Lato;
+    font-family: Lato, serif;
 }
 
 #logoSite
 {
 
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 li, a, button
 {
-    font-family: Lato;
+    font-family: Lato, serif;
     font-weight: 500;
     font-size: 16px;
     color: #edf0f1;
@@ -539,6 +539,11 @@ a.page-link.active {
 a.page-link.disabled{
     background-color: #cccccc;
     opacity: 50%;
+}
+form > div.my-alert-warning > ul > li {
+    color: black;
+    text-decoration: none;
+    text-align: center;
 }
 /* ------------ LAYOUT --------------- */
 

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -45,7 +46,7 @@ class SortieRepository extends ServiceEntityRepository
 
     public function getSorties(int $pageN, int $maxResults, array $params, ?int $userId){
         // First request
-        if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
+        //if(sizeof($params) == 0) return $this->getOpenSorties($pageN, $maxResults);
 
         $query = $this->createQueryBuilder('s');
             $campus = array_key_exists('campus', $params) ? $params['campus'] : false;
@@ -58,35 +59,62 @@ class SortieRepository extends ServiceEntityRepository
 
             // Min Date
             $minDate = array_key_exists('minDate', $params) ? $params['minDate'] : false;
-            if(!!$minDate){
-                $query->andWhere('s.dateHeureDebut >= :minDate')
-                    ->setParameter('minDate', $params['minDate']);
-            }
             // Max Date
             $maxDate = array_key_exists('maxDate', $params) ? $params['maxDate'] : false;
-            if(!!$maxDate){
-                $query->andWhere('s.dateHeureDebut <= :maxDate')
-                    ->setParameter('maxDate', $params['maxDate']);
-            }
-            // Additionnal filters
-            $filters = array_key_exists('filters', $params) ? $params['filters'] : false;
-            // @TODO Fix overlapse between dates and past conditions
-            if(!$minDate && !$maxDate){
-                $past = array_search('past', $filters) !== false;
-                if($past){
-                    $query->andWhere('s.dateHeureDebut < :today')
-                        ->setParameter('today', new \DateTime())
-                        ->addOrderBy('s.dateHeureDebut', 'DESC');
-                } else {
-                    $query->andWhere('s.dateHeureDebut >= :today')
-                        ->setParameter('today', new \DateTime())
-                        ->addOrderBy('s.dateHeureDebut', 'ASC');
-                }
-            } else {
-                $query->addOrderBy('s.dateHeureDebut', 'ASC');
-            }
-            if( !!$userId && $userId >= 0 && sizeof($filters) > 0){
 
+            // Additionnal filters
+            $filters = array_key_exists('filters', $params) ? $params['filters'] : [];
+            // @TODO Fix overlapse between dates and past conditions
+            $past = array_search('past', $filters) !== false ;
+
+            $today = new DateTime();
+
+            // No Date Filters - ASC from today
+            if(!$past && !$minDate && !$maxDate) {
+                $query->andWhere('s.dateHeureDebut >= :today')
+                    ->setParameter('today', $today)
+                    ->addOrderBy('s.dateHeureDebut', 'ASC');
+            } else {
+
+                // Date Filtering
+                if(!!$maxDate || !!$minDate){
+//
+//                    if(!!$minDate && !!$maxDate && $minDate > $maxDate){
+//                        $temp = $minDate;
+//                        $minDate = $maxDate;
+//                        $maxDate = $temp;
+//                    }
+//
+//                    $aMonth = (new DateTime())->sub(new \DateInterval("P1M"));
+//
+//                    if(!$minDate && $maxDate > $today){
+//                        $minDate = $today;
+//                    } else if(!$minDate && $maxDate < $today){
+//                        $minDate = $aMonth;
+//                    }
+
+                    if(!!$maxDate){
+                        $query = $this->filterMaxDate($query, $maxDate);
+                    }
+                    if(!!$minDate){
+                        // Default one month before today
+//                        $minDate = $minDate < $aMonth ? $aMonth : $minDate;
+
+                        $query = $this->filterMinDate($query, $minDate);
+                    }
+                }
+
+                if($past){
+                    $query = $this->filterMaxDate($query, $today)
+                    ->addOrderBy('s.dateHeureDebut', 'DESC');
+                } else {
+                    $query->addOrderBy('s.dateHeureDebut', 'ASC');
+                }
+            }
+
+//        dd($params, $minDate, $today, $aMonth, $maxDate);
+
+            if( !!$userId && $userId >= 0 && sizeof($filters) > 0){
                 $manager = array_search('manager', $filters) !== false;
                 if($manager){
                     $query->join('s.organisateur', 'o')
@@ -122,6 +150,18 @@ class SortieRepository extends ServiceEntityRepository
         return $paginator;
     }
 
+    private function filterMaxDate($query, $date){
+        $queryB = $query;
+        $queryB->andWhere('s.dateHeureDebut <= :dateMax')
+            ->setParameter('dateMax', $date);
+        return $queryB;
+    }
+    private function filterMinDate($query, $date){
+        $queryB = $query;
+        $queryB->andWhere('s.dateHeureDebut >= :dateMin')
+            ->setParameter('dateMin', $date);
+        return $queryB;
+    }
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */
