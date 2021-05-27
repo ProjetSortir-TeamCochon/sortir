@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Form\SearchFiltersType;
 use App\Repository\SortieRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,7 +30,47 @@ class MainController extends AbstractController
         } else {
             $params = $request->query->get('params');
         }
-        if(!$params) $params = array();
+
+        if(!$params) {
+            $params = array();
+        } else {
+            // ------------- Date Validation
+
+            // Min Date
+            $minDate = array_key_exists('minDate', $params) ? $params['minDate'] : false;
+            // Max Date
+            $maxDate = array_key_exists('maxDate', $params) ? $params['maxDate'] : false;
+
+            // Date Filtering and Validation
+            if(!!$maxDate || !!$minDate){
+                if(!!$minDate && !!$maxDate && $minDate > $maxDate){
+                    $temp = $minDate;
+                    $minDate = $maxDate;
+                    $maxDate = $temp;
+                }
+
+                $today = new DateTime();
+                $aMonth = (new DateTime())->sub(new \DateInterval("P1M"));
+
+                if(!$minDate && $maxDate > $today){
+                    $minDate = $today;
+                } else if(!$minDate && $maxDate < $today){
+                    $minDate = $aMonth;
+                }
+                if(!!$minDate){
+                    // Default one month before today
+                    $minDate = $minDate < $aMonth ? $aMonth : $minDate;
+                }
+
+                if(!!$minDate) {
+                    $params['minDate'] = $minDate;
+                }
+                if(!!$maxDate) {
+                    $params['maxDate'] = $maxDate;
+                }
+            }
+        }
+
         $paginator = $sortieRepository->getSorties(
             $page,
             $maxResults,

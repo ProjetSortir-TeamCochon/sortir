@@ -8,6 +8,11 @@
 
     <div class="padding">
     {{ form_start(searchForm) }}
+        {% if form_errors(searchForm.minDate) or form_errors(searchForm.maxDate) %}
+            <div class="flexline alert-danger my-alert-warning flexspaceeven" role="alert">
+                {{ form_errors(searchForm.minDate) }}{{ form_errors(searchForm.maxDate) }}
+            </div>
+        {% endif %}
         <div class="flexblock flexspaceeven">
             <p>Filtrer les sorties</p>
             <div class="flexline">{{ form_label(searchForm.campus) }}{{ form_widget(searchForm.campus) }}</div>
@@ -16,7 +21,11 @@
                 {{ form_label(searchForm.maxDate) }}{{ form_widget(searchForm.maxDate) }}
             </div>
                 <div class="dropdown flexline {% if not app.user %} disabled hidden{% endif %}">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFilters" data-bs-toggle="dropdown" aria-expanded="false">{{ form_label(searchForm.filters) }}</button>
+                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                            id="dropdownFilters" data-bs-toggle="dropdown" aria-expanded="false"
+                            >
+                        {{ form_label(searchForm.filters) }}
+                    </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownFilters">
                         {% for option in searchForm.filters %}
                             <div class="flexline">{{ form_widget(option) }}{{ form_label(option) }}</div>
@@ -26,7 +35,6 @@
 
             <div class="flexline"><button type="submit" class="btn btn-dark">Rechercher</button></div>
         </div>
-    {{ form_errors(searchForm) }}
     {{ form_end(searchForm) }}
     </div>
 
@@ -52,13 +60,29 @@
                 <td>{{ sortie.dateHeureDebut | date("d/m/Y H:i") }}</td>
                 <td>{{ sortie.dateLimiteInscription | date("d/m/Y") }}</td>
                 <td>{{ sortie.nbInscriptionsMax - sortie.users | length }} / {{ sortie.nbInscriptionsMax }}</td>
-                <td>{{ sortie.etat.libelle }}</td>
+                <td
+                       {% if sortie.etat.libelle is constant('App\\Entity\\Etat::OPEN') %}
+                            class="text-green"
+                        {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::DONE') %}
+                            class="text-red"
+                        {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::CLOSED') %}
+                            class="text-orange"
+                        {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
+                            class="text-blue"
+                        {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::CANCELLED') %}
+                            class="text-dark"
+                        {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::RUNNING') %}
+                            class="text-purple"
+                        {% endif %}
+                    >
+                    {{ sortie.etat.libelle }}
+                </td>
                 {% if app.user %}
-                    <td>
+                    <td class="inscriptionDesistement">
                         {% if sortie in app.user.sorties %}
-                            <img src="../public/img/icon/carrevert.png" class="inscriptionDesistement"/>
+                            <span>X</span>
                         {% else %}
-                            <img src="../public/img/icon/carrerouge.jpg" class="inscriptionDesistement"/>
+                            <span>.</span>
                         {% endif %}
                     </td>
                 {% endif %}
@@ -68,7 +92,7 @@
                         and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
                         and app.user and app.user.id == sortie.organisateur.id %}
                         {# @TODO ajouter le chemin pour modifier une sortie ICI #}
-                        <a href="#" class="table-link">Modifier</a>
+                        <a href="{{ path('sortie_modif', { id: sortie.id }) }}" class="table-link">Modifier</a>
                     {% else %}
                         <a href="{{ path('sorties_details', {'id':sortie.id}) }}" class="table-link">Afficher</a>
                     {% endif %}
@@ -110,7 +134,7 @@
             {% for i in 1..maxPages %}
                 <li class="page-item">
                     <a href="{{ path('main_accueil', { page: i, params: params, maxResults: maxResults }) }}"
-                       class="page-link{{ page == i ? ' active' : ' disabled' }}">
+                       class="page-link{{ page == i ? ' active' : '' }}">
                         {{ i }}
                     </a>
                 </li>

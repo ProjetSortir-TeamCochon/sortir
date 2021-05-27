@@ -16,7 +16,7 @@
         <p class="paraAfficherSortie"> Date limite d'inscription : </p>
         <p class="paraAfficherSortie"> Nombre de places: </p>
         <p class="paraAfficherSortie"> Durée : </p>
-        <p class="paraAfficherSortie"> Description et infos : </p>
+
 
     </div>
 
@@ -26,7 +26,7 @@
         <p class="paraAfficherSortie">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</p>
         <p class="paraAfficherSortie">{{ sortie.nbInscriptionsMax }}</p>
         <p class="paraAfficherSortie">{{ sortie.duree }} minutes</p>
-        <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
+
 
     </div>
     </section>
@@ -37,7 +37,6 @@
         <p class="paraAfficherSortie">Rue : </p>
         <p class="paraAfficherSortie">Code postal : </p>
         <p class="paraAfficherSortie">Latitude : </p>
-        <p class="paraAfficherSortie">Longitude : </p>
 
     </div>
 
@@ -47,10 +46,29 @@
         <p class="paraAfficherSortie"> {{ sortie.lieu.rue }} </p>
         <p class="paraAfficherSortie"> {{ sortie.lieu.ville.codePostal }} </p>
         <p class="paraAfficherSortie"> {{ sortie.lieu.latitude }} </p>
-        <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
 
     </div>
     </section>
+    <div class="containerSortie">
+        <section>
+            <div id="afficherSortie" class="container1sortie">
+                <p class="paraAfficherSortie"> Description et infos : </p>
+            </div>
+            <div id="afficherSortie" class="container2sortie">
+                <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
+            </div>
+        </section>
+
+
+       <section>
+           <div id="afficherSortie" class="container3sortie">
+               <p class="paraAfficherSortie">Longitude : </p>
+           </div>
+           <div id="afficherSortie" class="container4sortie">
+               <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
+           </div>
+       </section>
+    </div>
 
 
 </div>
