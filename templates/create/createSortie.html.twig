@@ -17,10 +17,10 @@
     <p>latitude : </p>
     <p>longitude : </p>
 #}
+    <div class="container padding">
         <button type="submit" class="btn btn-success "> Créer </button>
-        <div class="container padding">
-            <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
-        </div>
+        <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
+    </div>
     {{ form_end(sortieForm) }}
 
 
