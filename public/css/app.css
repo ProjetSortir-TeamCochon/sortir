@@ -143,8 +143,6 @@ select {
 #afficherSortie
 {
     display: inline-block;
-    max-width: 350px;
-    padding-top: 50px;
     padding-bottom: 50px;
     max-width: 700px;
     padding-top: 20px;
@@ -155,6 +153,7 @@ select {
     margin: auto;
 
 }
+
 
 .titreAfficherSortie
 {
@@ -175,6 +174,7 @@ select {
     width: 220px;
     font-weight: bold;
     text-align: left;
+
     max-height: 700px;
 
 }
@@ -474,3 +474,4 @@ a.page-link.disabled{
     width: 20px;
     border-radius: 5px;
 }
+
