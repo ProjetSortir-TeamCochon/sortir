@@ -27,9 +27,9 @@
                 <td>{{ user.telephone }}</td>
                 <td>
                     {% if user.actif == 1 %}
-                        Actif - <a href="{{ path('admin_desactivate', {'id':user.id}) }}" title="Inactiver" id="inactiver">&#128308 Inactiver</a>
+                        &#128994 Actif - <a href="{{ path('admin_desactivate', {'id':user.id}) }}" title="Inactiver" id="inactiver">Inactiver</a>
                     {% else %}
-                        Inactif - <a href="{{ path('admin_activate',{'id':user.id}) }}" title="Activer" id="activer">&#128994 Activer</a>
+                        &#128308 Inactif - <a href="{{ path('admin_activate',{'id':user.id}) }}" title="Activer" id="activer">Activer</a>
                     {% endif%}
                 </td>
             </tr>
