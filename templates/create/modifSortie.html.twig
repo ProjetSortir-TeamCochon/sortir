@@ -3,11 +3,19 @@
 
 {% block body %}
     <h1> Modification d'une sortie </h1>
-
+<div class="container">
     {{ form_start(sortieForm) }}
 
         {{ form_widget(sortieForm) }}
-        <button type="submit" class="submit"> Modifier </button>
+
+        <button type="submit" class="btn btn-success container"> Modifier </button>
+        <div class="container padding">
+            <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
+        </div>
     {{ form_end(sortieForm) }}
 
+
+
+
+</div>
 {% endblock %}

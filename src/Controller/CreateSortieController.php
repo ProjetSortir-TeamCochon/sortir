@@ -9,6 +9,7 @@ use App\Entity\Lieu;
 use App\Entity\Ville;
 use App\Entity\Etat;
 use App\Form\SortieType;
+use App\Repository\LieuRepository;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,6 +42,7 @@ class CreateSortieController extends AbstractController
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
 
             $sortie->setOrganisateur($user);
+            $sortie->addUser($user);
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -63,6 +65,7 @@ class CreateSortieController extends AbstractController
     {
         $sortie = $sortieRepository->find($id);
         $user = $this->getUser();
+
 
         if($user != $sortie->getOrganisateur()){
             $this->addFlash('error',"N'est pas le bon utilisateur");
