@@ -412,11 +412,37 @@ a.page-link.disabled{
 .padding{
     padding: 1em;
 }
+
 form > div.my-alert-warning > ul > li {
     color: black;
     text-decoration: none;
     text-align: center;
 }
+.text-green{
+    color:#0f5132;
+    background-color: #d1e7dd;
+}
+.text-dark{
+    color:#141619;
+    background-color: #d3d3d4;
+}
+.text-orange{
+    color:#664d03;
+    background-color: #fff3cd;
+}
+.text-red{
+    color:#842029;
+    background-color: #f8d7da;
+}
+.text-blue{
+    color:#055160;
+    background-color: #cfe2ff;
+}
+.text-purple{
+    color: cornflowerblue;
+    background-color: #c4d5f2;
+}
+
 /* ------------ LAYOUT --------------- */
 
 .flexline {
