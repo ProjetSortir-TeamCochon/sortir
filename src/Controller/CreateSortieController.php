@@ -46,7 +46,7 @@ class CreateSortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('succeess','La sortie a été créée');
+            $this->addFlash('success','La sortie a été créée.');
 
             // redirection à changer vers affichage de la sortie
             return $this->redirectToRoute('main_accueil');
@@ -80,7 +80,7 @@ class CreateSortieController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
 
-            $this->addFlash('succeess','La sortie a été modifiée');
+            $this->addFlash('success','La sortie a été modifiée.');
 
             // redirection à changer vers affichage de la sortie
             return $this->redirectToRoute('main_accueil');

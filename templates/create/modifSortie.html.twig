@@ -7,11 +7,14 @@
     {{ form_start(sortieForm) }}
 
         {{ form_widget(sortieForm) }}
+    <div class="padding">
+        <button type="submit" class="btn btn-success"> Modifier </button>
+        <a href="#" title="Suppression"><button type="button" class="btn btn-danger">Supprimer</button></a>
+        <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
+    </div>
 
-        <button type="submit" class="btn btn-success container"> Modifier </button>
-        <div class="container padding">
-            <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
-        </div>
+
+
     {{ form_end(sortieForm) }}
 
 
