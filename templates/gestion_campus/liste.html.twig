@@ -1,9 +1,6 @@
 {% extends 'base.html.twig' %}
 
-
-
-{% block title %}Liste campus
-{% endblock %}
+{% block title %}Campus | {{ parent() }}{% endblock %}
 
 {% block body %}
 
@@ -12,21 +9,19 @@
     <div class="divFiltrerVilles">
         <div>
             <h4>Filtrer les campus</h4>
-
             <p>Le nom contient : </p>
-
         </div>
-        <div class="btnRechercher">
+        <div class="inputRechercher">
             {{ form_start(rechercherForm) }}
             {{ form_widget(rechercherForm) }}
         </div>
-        <div>
-            <button class="btnSearch">Rechercher</button>
+        <div class="marginAuto">
+            <button class="btn btn-dark">Rechercher</button>
             {{ form_end(rechercherForm) }}
         </div>
 
     </div>
-    <div class="scroll3">
+    <div class="scroll">
     <table id="tableCampus">
         <tr>
             <th>Campus</th>
@@ -45,23 +40,15 @@
 
         <tr>
             {{ form_start(campusForm) }}
-            <td> {{ form_row(campusForm.nom) }}</td>
+            <td><div class="flexCenter">{{ form_row(campusForm.nom) }}</div></td>
 
-            <td><a href="{{ path('gestioncampus_liste') }}"><button class="btnGestionVilles">Ajouter</button></a></td>
+            <td><a href="{{ path('gestioncampus_liste') }}"><button class="btn btn-success">Ajouter</button></a></td>
 
             {{ form_end(campusForm) }}
 
         </tr>
 
     </table>
-    </div>
-    <div>
-
-
-
-
-
-
     </div>
 
 {% endblock %}

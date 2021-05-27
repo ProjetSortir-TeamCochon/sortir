@@ -10,14 +10,14 @@
 
     <section class="editAvatar">
 
-        <img src="{{ asset('img/profile-picture/' ~ app.user.profilePictureName) }}" class="avatar"/>
+        <img src="{{ asset('img/profile-picture/' ~ app.user.profilePictureName) }}" alt="avatar" class="avatar"/>
 
-        {{ form_start(uploadAvatarForm, {'action': path('profile_picture', {'id': app.user.id}), 'method': 'POST', 'enctype': "multipart/form-data"}) }}
+        {{ form_start(uploadAvatarForm, {'action': path('profile_edit_avatar', {'id': app.user.id}), 'method': 'POST', 'enctype': "multipart/form-data"}) }}
 
         {{ form_widget(uploadAvatarForm) }}
 
-        <section class="button">
-            <button type="submit" class="submit">Enregistrer</button>
+        <section class="flexline flexspaceeven">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
         </section>
 
         {{ form_end(uploadAvatarForm) }}
@@ -29,12 +29,9 @@
 
     {{ form_widget(registrationForm) }}
 
-        <section class="button">
-            <button type="submit" class="submit">Enregistrer</button>
-
-            <div class="button_retour">
-                <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="retour">Retour</button></a>
-            </div>
+        <section class="flexline flexspaceeven">
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a href="{{ path('main_accueil') }}" title="Accueil"><button type="button" class="btn btn-secondary">Retour</button></a>
         </section>
 
     {{ form_end(registrationForm) }}

@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Sortir | Accueil {% endblock %}
+{% block title %} Accueil | {{ parent() }} {% endblock %}
 
 {% block body %}
 
     {# ------------ SEARCH FILTERS --------------------- #}
 
-
+    <div class="padding">
     {{ form_start(searchForm) }}
         {% if form_errors(searchForm.minDate) or form_errors(searchForm.maxDate) %}
             <div class="flexline alert-danger my-alert-warning flexspaceeven" role="alert">
@@ -33,9 +33,11 @@
                     </div>
                 </div>
 
-            <div class="flexline"><button type="submit" class="btn btn-primary">Rechercher</button></div>
+            <div class="flexline"><button type="submit" class="btn btn-dark">Rechercher</button></div>
         </div>
     {{ form_end(searchForm) }}
+    </div>
+
 
     {# ------------------- SORTIES TABLE ----------------------- #}
     <table class="table table-light table-striped table-hover">
@@ -61,10 +63,14 @@
                 <td>{{ sortie.etat.libelle }}</td>
                 {% if app.user %}
                     <td>
-                        {% if sortie in app.user.sorties %} X {% endif %}
+                        {% if sortie in app.user.sorties %}
+                            <img src="../public/img/icon/carrevert.png" class="inscriptionDesistement"/>
+                        {% else %}
+                            <img src="../public/img/icon/carrerouge.jpg" class="inscriptionDesistement"/>
+                        {% endif %}
                     </td>
                 {% endif %}
-                <td>{{ sortie.organisateur.username }}</td>
+                <td><a href="{{ path('profile_user', {'id':sortie.organisateur.id}) }}" title="Visiter le profil">{{ sortie.organisateur.username }}</a></td>
                 <td>
                     {% if sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
                         and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
@@ -87,9 +93,14 @@
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
                     {% elseif app.user and sortie in app.user.sorties %}
-                        - <a href="#" class="table-link">Se désister</a>
+                        - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link">Se désister</a>
                     {% endif %}
 
+                    {% if sortie not in app.user.sorties %}
+
+                    <a href="{{ path('sorties_inscription', {'id':sortie.id}) }}">- Inscription</a>
+
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
@@ -122,4 +133,9 @@
             </li>
         </ul>
     </nav>
+
+    <section class="container">
+        <a href="{{ path('sortie_create') }}" title="Créer une sortie"><button class="btn btn-success">Créer une sortie</button></a>
+    </section>
+
 {% endblock %}

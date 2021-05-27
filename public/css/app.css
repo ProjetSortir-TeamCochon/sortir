@@ -73,6 +73,15 @@ header
     color: #0088a9;
 }
 
+.marginAuto{
+    margin: auto;
+}
+
+.inputRechercher{
+    display: flex;
+    flex-direction: column-reverse;
+}
+
 /*alert*/
 .alert{
     color: red;
@@ -109,40 +118,6 @@ select {
     max-width: 400px;
     display: block;
     margin-bottom: 1em;
-}
-
-/*buttons*/
-button.submit{
-    color : forestgreen;
-    padding: 1em 1em;
-    margin-top: 1em;
-    border: 1px solid forestgreen;
-    transition-duration: 0.4s;
-    border-radius: 15px;
-}
-
-button.submit:hover{
-    color: #FFFFFF;
-    background-color: forestgreen;
-}
-
-.button_retour{
-    display: flex;
-    justify-content: center;
-}
-
-button.retour{
-    color: lightpink;
-    padding: 1em 1em;
-    margin-top: 1em;
-    border: 1px solid lightpink;
-    transition-duration: 0.4s;
-    border-radius: 15px;
-}
-
-button.retour:hover{
-    color: #FFFFFF;
-    background-color: lightpink;
 }
 
 /* Outputs view */
@@ -230,34 +205,6 @@ button.retour:hover{
     max-height: 700px;
 }
 
-.boutonAfficherSorties
-{
-    width: 180px;
-    color: #ffffff;
-    font-size: 18px;
-    background-color: #24252A;
-    padding: 12px 0;
-    cursor: pointer;
-    border: 0;
-    border-radius: 20px;
-    outline: none;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin: auto;
-}
-.boutonAfficherSorties:hover
-{
-    color: white;
-    background-color: #3f4044;
-    text-decoration: blink;
-}
-.boutonAfficherSortiesDiv
-{
-    text-align: center;
-    margin-top: 50px;
-    margin-bottom: 50px;
-}
-
 /* Annuler Sortie */
 
 .container5sortie
@@ -275,12 +222,6 @@ label, input
     display: inline-block;
 }
 
-.boutonAnnulerSortie
-{
-    margin-right: 20px;
-    margin-left: 20px;
-}
-
 .formulaireAnnuler
 {
     display: inline-block;
@@ -296,14 +237,8 @@ section div{
     margin: 1em;
 }
 
-section.button{
-    display: flex;
-    justify-content: space-around;
-}
-
 .avatar{
     max-width: 17em;
-    border-radius: 10em;
 }
 
 .editAvatar{
@@ -370,13 +305,11 @@ table
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 50px;
     border-collapse: collapse;
 }
 th, td
 {
     padding: 10px;
-    text-align: left;
     border: solid 1px #ccc;
     text-align: center;
     font-weight: initial;
@@ -393,44 +326,20 @@ tr:nth-child(odd)
     background-color: #eee;
 }
 
-.tableauAction
-{
-
+.flexCenter{
+    display: flex;
+    justify-content: center;
 }
 
 /* Gestion villes */
 
 .divFiltrerVilles
 {
-    margin-left: 80px;
     display: flex;
     justify-content: initial;
     width: 60%;
     margin-left: auto;
     margin-right: auto;
-}
-
-.btnGestionVilles
-{
-    width: 80px;
-    color: #ffffff;
-    font-size: 18px;
-    background-color: #24252A;
-    padding: 3px 0;
-    cursor: pointer;
-    border: 0;
-    border-radius: 20px;
-    outline: none;
-    margin-top: 30px;
-    margin-bottom: 30px;
-    margin: auto;
-}
-
-.btnGestionVilles:hover
-{
-    color: white;
-    background-color: #3f4044;
-    text-decoration: blink;
 }
 
 a:link
@@ -454,43 +363,14 @@ a:visited:hover
     color: #525a5e;
 }
 
-.btnRechercher
-{
-    margin-left: 20px;
-    margin-top: 30px;
-}
-
-.btnSearch
-{
-    margin-top: 27px;
-    margin-left: 20px;
-    width: 100px;
-    color: #ffffff;
-    font-size: 18px;
-    background-color: #24252A;
-    padding: 3px 0;
-    cursor: pointer;
-    border: 0;
-    border-radius: 5px;
-    outline: none;
-
-}
-.btnSearch:hover
-{
-    color: white;
-    background-color: #3f4044;
-    text-decoration: blink;
-}
-
 .scroll
 {
+    margin: 2em auto;
     height: 400px;
     min-height: 100px;
     max-height: 800px;
-    overflow: scroll;
+    overflow: auto;
     width: 60%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .scroll2
@@ -498,21 +378,9 @@ a:visited:hover
     height: 200px;
     min-height: 100px;
     max-height: 800px;
-    overflow: scroll;
+    overflow: auto;
     width: 60%;
     margin-left: auto;
-    margin-right: auto;
-}
-
-.scroll3
-{
-    height: 400px;
-    min-height: 100px;
-    max-height: 800px;
-    overflow: scroll;
-    width: 40%;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 #updateTable
@@ -539,6 +407,10 @@ a.page-link.active {
 a.page-link.disabled{
     background-color: #cccccc;
     opacity: 50%;
+}
+
+.padding{
+    padding: 1em;
 }
 form > div.my-alert-warning > ul > li {
     color: black;
@@ -599,4 +471,11 @@ form > div.my-alert-warning > ul > li {
 }
 .mlt {
     margin-top: 2em;
+}
+
+.inscriptionDesistement
+{
+    height: 20px;
+    width: 20px;
+    border-radius: 5px;
 }

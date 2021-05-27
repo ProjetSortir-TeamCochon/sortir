@@ -60,12 +60,12 @@ class AppFixtures extends Fixture
 
         // Campus
         $campus = array(
-            (new Campus())->setNom("Paris"),
-            (new Campus())->setNom("Lyon"),
-            (new Campus())->setNom("Marseille"),
-            (new Campus())->setNom("Rennes"),
-            (new Campus())->setNom("Nantes"),
-            (new Campus())->setNom("Bordeaux")
+            (new Campus())->setNom("Campus Paris"),
+            (new Campus())->setNom("Campus Lyon"),
+            (new Campus())->setNom("Campus Marseille"),
+            (new Campus())->setNom("Campus Rennes"),
+            (new Campus())->setNom("Campus Nantes"),
+            (new Campus())->setNom("Campus Bordeaux")
         );
 
         // Lieu

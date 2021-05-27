@@ -5,7 +5,12 @@ namespace App\Controller;
 
 
 use App\Entity\Sortie;
+use App\Entity\Lieu;
+use App\Entity\Ville;
+use App\Entity\Etat;
 use App\Form\SortieType;
+use App\Repository\SortieRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,27 +33,60 @@ class CreateSortieController extends AbstractController
     ): Response
     {
         $sortie = new Sortie();
-
+        $user = $this->getUser();
         $sortieForm = $this->createForm(SortieType::class, $sortie);
 
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
 
-            $sortie->setEtat(1);
-
+            $sortie->setOrganisateur($user);
             $entityManager->persist($sortie);
             $entityManager->flush();
 
             $this->addFlash('succeess','La sortie a été créée');
 
             // redirection à changer vers affichage de la sortie
-            return $this->redirectToRoute('sortie_create',['id' => $sortie->getId()]);
+            return $this->redirectToRoute('main_accueil');
         }
 
         return $this->render('create/createSortie.html.twig', [
             'sortieForm' => $sortieForm->createView()
         ]);
+    }
+
+
+    /**
+     * @Route("/modif/{id}", name="modif")
+     */
+    public function modifie(int $id, SortieRepository $sortieRepository,EntityManagerInterface $entityManager,Request $request)
+    {
+        $sortie = $sortieRepository->find($id);
+        $user = $this->getUser();
+
+        if($user != $sortie->getOrganisateur()){
+            $this->addFlash('error',"N'est pas le bon utilisateur");
+            return $this->redirectToRoute('main_accueil');
+        }
+        $sortieForm = $this->createForm(SortieType::class, $sortie);
+
+        $sortieForm->handleRequest($request);
+
+        if ($sortieForm->isSubmitted() && $sortieForm->isValid()){
+
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+
+            $this->addFlash('succeess','La sortie a été modifiée');
+
+            // redirection à changer vers affichage de la sortie
+            return $this->redirectToRoute('main_accueil');
+        }
+
+        return $this->render('create/modifSortie.html.twig', [
+            'sortieForm' => $sortieForm->createView()
+        ]);
+
     }
 
 }

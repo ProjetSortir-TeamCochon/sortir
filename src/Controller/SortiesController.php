@@ -3,12 +3,12 @@
 
 namespace App\Controller;
 
-
-use App\Entity\Etat;
 use App\Entity\Sortie;
+use App\Entity\User;
 use App\Form\AnnulerSortieType;
 use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,6 +82,54 @@ class SortiesController extends AbstractController
         return $this->redirectToRoute('main_accueil');
 
         return $this->render('sorties/effacerSorties.html.twig');
+    }
+
+    /**
+     * @Route("/inscription/{id}", name="inscription")
+     */
+    public function inscription(int $id,
+                                UserRepository $userRepository,
+                                SortieRepository $sortieRepository,
+                                Request $request,
+                                EntityManagerInterface $entityManager)
+    {
+
+        $userActual = $this->getUser();
+        $user = $userRepository->find($userActual);
+        $sortie = $sortieRepository->find($id);
+
+        $user->addSortie($sortie);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $this->addFlash('success', 'Inscription validée');
+        return $this->redirectToRoute('main_accueil');
+
+        return $this->render('sorties/inscription.html.twig');
+    }
+
+    /**
+     * @Route("/desistement/{id}", name="desistement")
+     */
+    public function desistement(int $id,
+                                UserRepository $userRepository,
+                                SortieRepository $sortieRepository,
+                                Request $request,
+                                EntityManagerInterface $entityManager)
+    {
+
+        $userActual = $this->getUser();
+        $user = $userRepository->find($userActual);
+        $sortie = $sortieRepository->find($id);
+
+        $sorties = $user->removeSortie($sortie);
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+        $this->addFlash('success', 'Desistement validé');
+        return $this->redirectToRoute('main_accueil');
+
+        return $this->render('sorties/desistement.html.twig');
     }
 
 
