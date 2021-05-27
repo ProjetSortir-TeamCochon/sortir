@@ -64,9 +64,9 @@
                 {% if app.user %}
                     <td>
                         {% if sortie in app.user.sorties %}
-                            <img src="../public/img/icon/carrevert.png" class="inscriptionDesistement"/>
+                            <img src="{{ asset('../public/img/icon/carrevert.png') }}" class="inscriptionDesistement"/>
                         {% else %}
-                            <img src="../public/img/icon/carrerouge.jpg" class="inscriptionDesistement"/>
+                            <img src="{{ asset('../public/img/icon/carrerouge.jpg') }}" class="inscriptionDesistement"/>
                         {% endif %}
                     </td>
                 {% endif %}
@@ -96,7 +96,7 @@
                         - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link">Se désister</a>
                     {% endif %}
 
-                    {% if sortie not in app.user.sorties %}
+                    {% if app.user and sortie not in app.user.sorties %}
 
                     <a href="{{ path('sorties_inscription', {'id':sortie.id}) }}">- Inscription</a>
 
