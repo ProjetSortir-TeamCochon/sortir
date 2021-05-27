@@ -14,7 +14,7 @@ class AnnulerSortieType extends AbstractType
         $builder
             ->add('field_name', TextareaType::class, [
                 'label' => ' ',
-                'required' => 'required'
+                'required' => true
             ])
         ;
     }
