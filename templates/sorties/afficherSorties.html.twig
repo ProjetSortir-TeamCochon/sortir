@@ -8,71 +8,137 @@
 {% block body %}
 
     <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
-<div class="containerSortie">
-    <section>
-    <div id="afficherSortie" class="container1sortie">
-        <p class="paraAfficherSortie">Nom de la sortie : </p>
-        <p class="paraAfficherSortie"> Date/heure de la sortie : </p>
-        <p class="paraAfficherSortie"> Date limite d'inscription : </p>
-        <p class="paraAfficherSortie"> Nombre de places: </p>
-        <p class="paraAfficherSortie"> Durée : </p>
 
 
-    </div>
 
-    <div id="afficherSortie" class="container2sortie">
-        <p class="paraAfficherSortie">{{ sortie.nom }}</p>
-        <p class="paraAfficherSortie">{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</p>
-        <p class="paraAfficherSortie">{{ sortie.dateLimiteInscription | date('d/m/Y') }}</p>
-        <p class="paraAfficherSortie">{{ sortie.nbInscriptionsMax }}</p>
-        <p class="paraAfficherSortie">{{ sortie.duree }} minutes</p>
+    <table id="afficherSortie">
+        <tr>
+            <td>
+                <p><span>Nom de la sortie : </span></p>
+            </td>
+            <td>
+                <p>{{ sortie.nom }}</p>
+            </td>
+            <td>
+                <p><span>Campus : </span></p>
+            </td>
+            <td>
+                <p> {{ sortie.campus.nom }} </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><span>Date/heure de la sortie : </span></p>
+            </td>
+            <td>
+                <p>{{ sortie.dateHeureDebut | date('d/m/Y H:i') }}</p>
+            </td>
+            <td>
+                <p><span>Lieu : </span></p>
+            </td>
+            <td>
+                <p> {{ sortie.lieu.nom }} </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p> <span>Date limite d'inscription : </span></p>
+
+            </td>
+            <td>
+                <p>{{ sortie.dateLimiteInscription | date('d/m/Y') }}</p>
+
+            </td>
+            <td>
+                <p><span>Rue :</span> </p>
+
+            </td>
+            <td>
+                <p> {{ sortie.lieu.rue }} </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><span></span> Nombre de places: </p>
+
+            </td>
+            <td>
+                <p>{{ sortie.nbInscriptionsMax }}</p>
+
+            </td>
+            <td>
+                <p><span>Code postal : </span></p>
+
+            </td>
+            <td>
+                <p> {{ sortie.lieu.ville.codePostal }} </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><span>Durée : </span></p>
+
+            </td>
+            <td>
+                <p>{{ sortie.duree }} minutes</p>
+
+            </td>
+            <td>
+                <p><span>Latitude : </span></p>
+<span></span>
+            </td>
+            <td>
+                <p> {{ sortie.lieu.latitude }} </p>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><span>Description et infos :</span> </p>
+
+            </td>
+            <td>
+                <p>{{ sortie.infosSortie }}</p>
+
+            </td>
+            <td>
+                <p><span>Longitude : </span></p>
+
+            </td>
+            <td>
+                <p> {{ sortie.lieu.longitude }} </p>
+
+            </td>
+        </tr>
+    </table>
 
 
-    </div>
-    </section>
-    <section>
-    <div id="afficherSortie" class="container3sortie">
-        <p class="paraAfficherSortie">Campus : </p>
-        <p class="paraAfficherSortie">Lieu : </p>
-        <p class="paraAfficherSortie">Rue : </p>
-        <p class="paraAfficherSortie">Code postal : </p>
-        <p class="paraAfficherSortie">Latitude : </p>
+<h4 id="titreListeParticipants">Liste des participants :</h4>
 
-    </div>
-
-    <div id="afficherSortie" class="container4sortie">
-        <p class="paraAfficherSortie"> {{ sortie.campus.nom }} </p>
-        <p class="paraAfficherSortie"> {{ sortie.lieu.nom }} </p>
-        <p class="paraAfficherSortie"> {{ sortie.lieu.rue }} </p>
-        <p class="paraAfficherSortie"> {{ sortie.lieu.ville.codePostal }} </p>
-        <p class="paraAfficherSortie"> {{ sortie.lieu.latitude }} </p>
-
-    </div>
-    </section>
-    <div class="containerSortie">
-        <section>
-            <div id="afficherSortie" class="container1sortie">
-                <p class="paraAfficherSortie"> Description et infos : </p>
-            </div>
-            <div id="afficherSortie" class="container2sortie">
-                <p class="paraAfficherSortie">{{ sortie.infosSortie }}</p>
-            </div>
-        </section>
+    <table id="listeParticipants">
+        <tr>
+            <th>
+                PSEUDO
+            </th>
+            <th>
+                NOM
+            </th>
+        </tr>
+        {% for user in usersRegistered %}
+        <tr>
+            <td>
+                {{ user.username }}
+            </td>
+            <td>
+                {{ user.nom }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 
 
-       <section>
-           <div id="afficherSortie" class="container3sortie">
-               <p class="paraAfficherSortie">Longitude : </p>
-           </div>
-           <div id="afficherSortie" class="container4sortie">
-               <p class="paraAfficherSortie"> {{ sortie.lieu.longitude }} </p>
-           </div>
-       </section>
-    </div>
 
-
-</div>
-    <div class="boutonAfficherSortiesDiv">
-    <a href="{{ path('sorties_annuler', {'id':sortie.id}) }}"><button class="boutonAfficherSorties">Annuler</button></a>
-    </div>
 {% endblock %}

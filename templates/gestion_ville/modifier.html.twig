@@ -16,12 +16,12 @@
             <p>Le nom contient : </p>
 
         </div>
-        <div class="btnRechercher">
+        <div class="marginAuto">
             {{ form_start(rechercherForm) }}
             {{ form_widget(rechercherForm) }}
         </div>
         <div>
-            <button class="btnSearch">Rechercher</button>
+            <button class="btn btn-dark">Rechercher</button>
             {{ form_end(rechercherForm) }}
         </div>
 
@@ -47,7 +47,7 @@
             {{ form_start(villeForm) }}
             <td> {{ form_row(villeForm.nom) }}</td>
             <td>{{ form_row(villeForm.codePostal) }}</td>
-            <td><a href="{{ path('gestionvilles_liste') }}"><button class="btnGestionVilles">Modifier</button></a></td>
+            <td><a href="{{ path('gestionvilles_liste') }}"><button class="btn btn-success">Modifier</button></a></td>
 
             {{ form_end(villeForm) }}
 

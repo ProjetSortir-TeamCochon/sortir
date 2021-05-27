@@ -36,4 +36,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->flush();
     }
 
+    public function getUserRegistration()
+    {
+
+    }
+
 }

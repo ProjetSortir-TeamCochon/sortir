@@ -22,14 +22,13 @@ class Ville
 
     /**
      * @Assert\NotBlank(message="Founissez un nom de ville")
-     * @Assert\Length(min=2)
+     * @Assert\Length(min=2, minMessage="2 caractéres minimum")
      * @ORM\Column(type="string", length=255)
      */
     private $nom;
 
     /**
-     * @Assert\Range (min="0", max="10", notInRangeMessage="Pas dans le range")
-     * @Assert\Length(max=2)
+     * @Assert\Range (min="01000", max="98000", notInRangeMessage="Code postal invalide")
      * @ORM\Column(type="integer")
      */
     private $codePostal;
