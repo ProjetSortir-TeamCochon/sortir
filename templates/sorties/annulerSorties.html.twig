@@ -7,55 +7,38 @@
 
 {% block body %}
 
-    <h1 class="titreAfficherSortie"> {{ sortie.nom | upper }} </h1>
-    <div class="containerSortie">
-        <div id="afficherSortie" class="container1sortie">
-            <p class="paraAfficherSortie">Nom de la sortie : </p>
-            <p class="paraAfficherSortie"> Date : </p>
-            <p class="paraAfficherSortie"> Campus : </p>
-            <p class="paraAfficherSortie"> Lieu : </p>
+
+
+    <table id="tableAnnulerSortie">
+        <tr>
+            <td>Nom de la sortie : </td>
+            <td>{{ sortie.nom }}</td>
+        </tr>
+        <tr>
+            <td>Date de la sortie : </td>
+            <td>{{ sortie.dateHeureDebut | date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <td>Campus : </td>
+            <td>{{ sortie.campus.nom }}</td>
+        </tr>
+        <tr>
+            <td>Lieu : </td>
+            <td>{{ sortie.lieu.nom }}</td>
+        </tr>
+        <tr>
+            <td>Motif</td>
+            {{ form_start(motifForm) }}
+            <td>{{ form_widget(motifForm) }}</td>
+
+        </tr>
+    </table>
 
 
 
-
-        </div>
-
-        <div id="afficherSortie" class="container2sortie">
-            <p class="paraAfficherSortie">{{ sortie.nom }}</p>
-            <p class="paraAfficherSortie">{{ sortie.dateHeureDebut | date('d/m/Y') }}</p>
-            <p class="paraAfficherSortie"> {{ sortie.campus.nom }} </p>
-            <p class="paraAfficherSortie"> {{ sortie.lieu.nom }} </p>
-
-
-
-        </div>
-
-
-    </div>
-    <div class="containerSortie">
-        <div id="afficherSortie" class="container5sortie">
-
-                <div class="formulaireAnnuler">{{ form_start(motifForm) }}
-
-
-                </div>
-
-            <div class="formulaireAnnuler">
-                {{ form_widget(motifForm) }}
-            </div>
-        </div>
-
-
-
-
-    </div>
-
-
-
-
-    <div class="boutonAfficherSortiesDiv">
-        <a href="#" class="boutonAnnulerSortie"><button class="boutonAfficherSorties">Enregistrer</button></a>
+    <div class="boutonsAnnulerSorties">
+        <a href="{{ path('sorties_annuler', {'id':sortie.id})  }}" id="boutonEnregistrerAnnulerSortie"><button class="btn btn-success">Enregistrer</button></a>
         {{ form_end(motifForm) }}
-        <a href="{{ path('main_accueil') }}" class="boutonAnnulerSortie"><button class="boutonAfficherSorties">Annuler</button></a>
+        <a href="{{ path('main_accueil') }}"><button class="btn btn-danger">Annuler</button></a>
     </div>
 {% endblock %}

@@ -4,6 +4,9 @@
 
 {% block body %}
 
+
+
+
     <h1>Gestion des villes</h1>
     <br>
     <div class="divFiltrerVilles">
@@ -40,6 +43,7 @@
 
             <tr>
                 {{ form_start(villesForm) }}
+
                 <td><div class="flexCenter"> {{ form_row(villesForm.nom) }} </div></td>
                 <td><div class="flexCenter">{{ form_row(villesForm.codePostal) }} </div></td>
                 <td><a href="{{ path('gestionvilles_liste') }}"><button class="btn btn-success">Ajouter</button></a></td>

@@ -13,7 +13,8 @@ class AnnulerSortieType extends AbstractType
     {
         $builder
             ->add('field_name', TextareaType::class, [
-                'label' => 'Motif : '
+                'label' => ' ',
+                'required' => 'required'
             ])
         ;
     }

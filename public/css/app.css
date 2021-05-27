@@ -133,26 +133,6 @@ select {
     margin-right: 10px;
 }
 
-/* afficher sorties */
-
-.containerSortie
-{
-    text-align: center;
-}
-
-#afficherSortie
-{
-    display: inline-block;
-    padding-bottom: 50px;
-    max-width: 700px;
-    padding-top: 20px;
-    padding-bottom: 0px;
-    margin-left: 100px;
-    margin-right: 100px;
-    min-width: 10px;
-    margin: auto;
-
-}
 
 
 .titreAfficherSortie
@@ -162,60 +142,6 @@ select {
     padding-bottom: 40px;
 }
 
-.paraAfficherSortie
-{
-    padding: 20px 5px 20px 5px;
-}
-
-.container1sortie
-{
-    max-width: 400px;
-    min-width: 20px;
-    width: 220px;
-    font-weight: bold;
-    text-align: left;
-
-    max-height: 700px;
-
-}
-.container2sortie
-{
-    max-width: 400px;
-    min-width: 20px;
-    width: 220px;
-    text-align: right;
-    max-height: 700px;
-
-}
-.container3sortie
-{
-    max-width: 400px;
-    min-width: 20px;
-    width: 220px;
-    font-weight: bold;
-    text-align: left;
-    max-height: 700px;
-}
-.container4sortie
-{
-    max-width: 400px;
-    min-width: 20px;
-    width: 220px;
-    text-align: right;
-    max-height: 700px;
-}
-
-/* Annuler Sortie */
-
-.container5sortie
-{
-    max-width: 700px;
-    min-width: 20px;
-    width: 440px;
-    font-weight: bold;
-    text-align: left;
-    max-height: 700px;
-}
 
 label, input
 {
@@ -313,6 +239,7 @@ th, td
     border: solid 1px #ccc;
     text-align: center;
     font-weight: initial;
+    width: 350px;
 }
 
 th
@@ -382,6 +309,7 @@ a:visited:hover
     width: 60%;
     margin-left: auto;
 }
+
 
 #updateTable
 {
@@ -475,3 +403,64 @@ a.page-link.disabled{
     border-radius: 5px;
 }
 
+#afficherSortie
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+}
+
+.buttonAffichageSortie
+{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#listeParticipants
+{
+    margin-bottom: 100px;
+
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: left;
+    margin-left: 100px;
+}
+
+#titreListeParticipants
+{
+    display: flex;
+    justify-content: left;
+    margin-left: 150px;
+    margin-top: 100px;
+}
+
+.boutonsAnnulerSorties
+{
+    display: flex;
+    justify-content: center;
+}
+
+#boutonEnregistrerAnnulerSortie
+{
+    margin-right: 1em;
+}
+
+#tableAnnulerSortie
+{
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-collapse: collapse;
+    margin-top: 100px;
+    margin-bottom: 50px;
+}
