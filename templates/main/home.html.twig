@@ -104,11 +104,11 @@
                             or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
                             {# @TODO ajouter le chemin pour annuler une sortie ICI #}
                             {# @TODO filtrer pour sorties passees #}
-                            - <a href="#" class="table-link">Annuler</a>
+
                         {% endif %}
                     {# @TODO ajouter le chemin pour se desinscrire ICI #}
                     {% elseif app.user and sortie in app.user.sorties %}
-                        - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link">Se désister</a>
+                        - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link"> Desistement</a>
                     {% endif %}
 
                     {% if app.user and sortie not in app.user.sorties %}
@@ -116,8 +116,8 @@
                     <a href="{{ path('sorties_inscription', {'id':sortie.id}) }}">- Inscription</a>
 
                     {% endif %}
-                    {% if app.user and app.user.id == sortie.organisateur.id %}
-                    <a href="{{ path('sorties_annuler', {'id': sortie.id}) }}">Annulation</a>
+                    {% if app.user and app.user.id == sortie.organisateur.id and sortie.etat.libelle is not constant('App\\Entity\\Etat::CANCELLED')%}
+                    <a href="{{ path('sorties_annuler', {'id': sortie.id}) }}">- Annulation</a>
                     {% endif %}
                 </td>
             </tr>
