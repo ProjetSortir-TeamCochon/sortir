@@ -507,6 +507,20 @@ a.page-link.disabled{
     font-weight: bold;
 }
 
+.error
+{
+    color: black;
+    font-weight: bold;
+    background: #5eb5e0;
+}
+
+ ul > li
+{
+    color: red;
+     list-style-type: none;
+}
+
+
 /* 404 */
 .fundo{
     animation: scales 3s alternate  infinite;

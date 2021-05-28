@@ -45,6 +45,7 @@
 
         <tr>
             {{ form_start(villeForm) }}
+            {{ form_errors(villeForm) }}
             <td> {{ form_row(villeForm.nom) }}</td>
             <td>{{ form_row(villeForm.codePostal) }}</td>
             <td><a href="{{ path('gestionvilles_liste') }}"><button class="btn btn-success">Modifier</button></a></td>

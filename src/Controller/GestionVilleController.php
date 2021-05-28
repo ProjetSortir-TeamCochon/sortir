@@ -43,6 +43,11 @@ class GestionVilleController extends AbstractController
             $this->addFlash('success', 'Ville correctement ajoutée ');
             return $this->redirectToRoute('gestionvilles_liste');
         }
+        if($villesForm->isSubmitted() && !$villesForm->isValid())
+        {
+            $this->addFlash('alert', 'Ville non ajoutée');
+
+        }
 
         return $this->render('gestion_ville/liste.html.twig', [
             "villes" => $villes,
@@ -77,6 +82,11 @@ class GestionVilleController extends AbstractController
 
             $this->addFlash('success', 'Ville correctement modifiée');
             return $this->redirectToRoute('gestionvilles_liste');
+        }
+        if($villeForm->isSubmitted() && !$villeForm->isValid())
+        {
+            $this->addFlash('danger', 'Ville non ajoutée');
+            return $this->redirectToRoute('gestionvilles_modifier', ['id'=>$id]);
         }
 
 
