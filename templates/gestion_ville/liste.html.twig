@@ -43,6 +43,7 @@
 
             <tr>
                 {{ form_start(villesForm) }}
+               {{ form_errors(villesForm) }}
 
                 <td><div class="flexCenter"> {{ form_row(villesForm.nom) }} </div></td>
                 <td><div class="flexCenter">{{ form_row(villesForm.codePostal) }} </div></td>
