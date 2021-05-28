@@ -3,6 +3,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Etat;
 use App\Entity\Sortie;
 use App\Entity\User;
 use App\Form\AnnulerSortieType;
@@ -10,6 +11,7 @@ use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/sorties", name="sorties_")
+ * @IsGranted("ROLE_USER")
  */
 class SortiesController extends AbstractController
 {
@@ -84,8 +87,6 @@ class SortiesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('main_accueil');
-
-        return $this->render('sorties/effacerSorties.html.twig');
     }
 
     /**
@@ -111,7 +112,6 @@ class SortiesController extends AbstractController
         $this->addFlash('success', 'Inscription validée');
         return $this->redirectToRoute('main_accueil');
 
-        return $this->render('sorties/inscription.html.twig');
     }
 
     /**
@@ -136,12 +136,35 @@ class SortiesController extends AbstractController
         $entityManager->flush();
         $this->addFlash('success', 'Desistement validé');
         return $this->redirectToRoute('main_accueil');
-
-        return $this->render('sorties/desistement.html.twig');
     }
 
 
+    /**
+     * @Route("/publier/{id}", name ="publier")
+     */
+    public function publier(int $id,
+                            SortieRepository $sortieRepository,
+                            EtatRepository $etatRepository,
+                            Request $request,
+                            EntityManagerInterface $manager)
+    {
+        $user = $this->getUser();
+        $sortie = $sortieRepository->find($id);
 
+        if($sortie->getEtat()->getLibelle() != Etat::CREATED){
+            $this->addFlash('error', 'Sortie déjà publiée ou annulée.');
+            return $this->redirectToRoute('main_accueil');
+        }
 
+        if($user != $sortie->getOrganisateur() && !$this->isGranted("ROLE_ADMIN") ){
+            $this->addFlash('error', 'Vous n\' avez pas les droits sur cette sortie.');
+            return $this->redirectToRoute('main_accueil');
+        }
 
+        $sortie->setEtat($etatRepository->findOneByLibelle(Etat::OPEN));
+        $manager->persist($sortie);
+        $manager->flush();
+        $this->addFlash('success', "La sortie est publiée.");
+        return $this->redirectToRoute('sorties_details', [ 'id' => $id ]);
+    }
 }

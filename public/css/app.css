@@ -3,24 +3,26 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Lato;
+    font-family: Lato, serif;
 }
 
 #logoSite
 {
 
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 li, a, button
 {
-    font-family: Lato;
+    font-family: Lato, serif;
     font-weight: 500;
     font-size: 16px;
-    color: #edf0f1;
     text-decoration: none;
 }
 
+a, button {
+    color: #edf0f1;
+}
 
 h1,h2{
     margin-top: 1em;
@@ -59,7 +61,7 @@ header
 .nav_links li
 {
     display: inline-block;
-    padding: 0px 20px;
+    padding: 0 20px;
 }
 
 .nav_links li a
@@ -292,28 +294,24 @@ a:visited:hover
 
 .text-green
 {
-    background-color: #51ce6d;
     background: rgba(0,255,0,0.2);
     color: #000000;
 }
 
 .text-red
 {
-    background-color: #d22f35;
     background: rgba(255,0,0,0.2);
     color: #000000;
 }
 
 .text-orange
 {
-    background-color: #b18436;
     background: rgba(255,165,0,0.2);
     color: #000000;
 }
 
 .text-blue
 {
-    background-color: #398aa3;
     background: rgba(0,191,255,0.2);
     color: #000000;
 }
@@ -340,14 +338,12 @@ a:visited:hover
 
 .text-dark
 {
-    background-color: #090909;
     background: rgba(0,0,0,0.2);
     color: #000000;
 }
 
 .text-purple
 {
-    background-color: #853bc6;
     background: rgba(147,112,219,0.2);
     color: #000000;
 }
@@ -523,6 +519,8 @@ a.page-link.disabled{
     color: red;
      list-style-type: none;
 }
+
+
 /* 404 */
 .fundo{
     animation: scales 3s alternate  infinite;
