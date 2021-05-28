@@ -116,7 +116,7 @@
 
                         {% if app.user and sortie in app.user.sorties %}
                              - {% include 'inc/btn_desister.html.twig' with { id: sortie.id } %}
-                        {% elseif app.user %}
+                        {% elseif app.user and sortie.users | length() < sortie.nbInscriptionsMax %}
                              - {% include 'inc/btn_inscription.html.twig' with { id: sortie.id } %}
                         {% endif %}
 
