@@ -88,36 +88,51 @@
                 {% endif %}
                 <td><a href="{{ path('profile_user', {'id':sortie.organisateur.id}) }}" title="Visiter le profil">{{ sortie.organisateur.username }}</a></td>
                 <td>
-                    {% if sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
-                        and sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')
-                        and app.user and app.user.id == sortie.organisateur.id %}
-                        <a href="{{ path('sortie_modif', { id: sortie.id }) }}" class="table-link">Modifier</a>
-                    {% else %}
-                        <a href="{{ path('sorties_details', {'id':sortie.id}) }}" class="table-link">Afficher</a>
-                    {% endif %}
 
-                    {% if app.user and app.user.id == sortie.organisateur.id %}
-                        {% if sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
-                            {# @TODO ajouter le chemin pour publier ICI #}
-                            - <a href="#" class="table-link">Publier</a>
-                        {% elseif sortie.etat.libelle is not constant('App\\Entity\\Etat::DONE')
-                            or sortie.etat.libelle is not constant('App\\Entity\\Etat::RUNNING')%}
-                            {# @TODO ajouter le chemin pour annuler une sortie ICI #}
-                            {# @TODO filtrer pour sorties passees #}
-                            - <a href="#" class="table-link">Annuler</a>
+                    {% if sortie.etat.libelle is constant('App\\Entity\\Etat::DONE')
+                        or sortie.etat.libelle is constant('App\\Entity\\Etat::CANCELLED')
+                        or sortie.etat.libelle is constant('App\\Entity\\Etat::RUNNING') %}
+
+                        {% include 'inc/btn_afficher.html.twig' with { id: sortie.id } %}
+
+                    {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::CREATED') %}
+
+                        {% if app.user and app.user.id == sortie.organisateur.id %}
+                            {% include 'inc/btn_modifier.html.twig' with { id: sortie.id } %}
+                            - {% include 'inc/btn_publier.html.twig' with { id: sortie.id } %}
+                            - {% include 'inc/btn_annuler.html.twig' with { id: sortie.id } %}
+                        {% else %}
+                            {% include 'inc/btn_afficher.html.twig' with { id: sortie.id } %}
                         {% endif %}
-                    {# @TODO ajouter le chemin pour se desinscrire ICI #}
-                    {% elseif app.user and sortie in app.user.sorties %}
-                        - <a href="{{ path('sorties_desistement', {'id':sortie.id}) }}" class="table-link">Se désister</a>
-                    {% endif %}
 
-                    {% if app.user and sortie not in app.user.sorties %}
+                    {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::OPEN') %}
 
-                    <a href="{{ path('sorties_inscription', {'id':sortie.id}) }}">- Inscription</a>
+                        {% if app.user and app.user.id == sortie.organisateur.id %}
+                            {% include 'inc/btn_modifier.html.twig' with { id: sortie.id } %}
+                             - {% include 'inc/btn_annuler.html.twig' with { id: sortie.id } %}
+                        {% else %}
+                            {% include 'inc/btn_afficher.html.twig' with { id: sortie.id } %}
+                        {% endif %}
 
-                    {% endif %}
-                    {% if app.user and app.user.id == sortie.organisateur.id %}
-                    <a href="{{ path('sorties_annuler', {'id': sortie.id}) }}">Annulation</a>
+                        {% if app.user and sortie in app.user.sorties %}
+                             - {% include 'inc/btn_desister.html.twig' with { id: sortie.id } %}
+                        {% elseif app.user %}
+                             - {% include 'inc/btn_inscription.html.twig' with { id: sortie.id } %}
+                        {% endif %}
+
+                    {% elseif sortie.etat.libelle is constant('App\\Entity\\Etat::CLOSED') %}
+
+                        {% if app.user and app.user.id == sortie.organisateur.id %}
+                            {% include 'inc/btn_modifier.html.twig' with { id: sortie.id } %}
+                            - {% include 'inc/btn_annuler.html.twig' with { id: sortie.id } %}
+                        {% else %}
+                            {% include 'inc/btn_afficher.html.twig' with { id: sortie.id } %}
+                        {% endif %}
+
+                        {% if app.user and sortie in app.user.sorties %}
+                            - {% include 'inc/btn_desister.html.twig' with { id: sortie.id } %}
+                        {% endif %}
+
                     {% endif %}
                 </td>
             </tr>
