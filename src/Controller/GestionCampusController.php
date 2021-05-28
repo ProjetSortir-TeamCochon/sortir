@@ -34,7 +34,7 @@ class GestionCampusController extends AbstractController
 
         $campusForm->handleRequest($request);
 
-        if($campusForm->isSubmitted())
+        if($campusForm->isSubmitted() && $campusForm->isValid())
         {
             $entityManager->persist($newCampus);
             $entityManager->flush();
@@ -42,6 +42,11 @@ class GestionCampusController extends AbstractController
             $this->addFlash('success', 'Campus correctement ajouté !');
             return $this->redirectToRoute('gestioncampus_liste');
         }
+        if($campusForm->isSubmitted() && !$campusForm->isValid())
+        {
+        $this->addFlash('danger', 'Campus non ajoutée');
+        return $this->redirectToRoute('gestioncampus_liste');
+         }
 
 
         return $this->render('gestion_campus/liste.html.twig', [
@@ -62,13 +67,18 @@ class GestionCampusController extends AbstractController
         $dataForm = $this->createForm(RechercherFormType::class);
         $campusForm->handleRequest($request);
 
-        if($campusForm->isSubmitted())
+        if($campusForm->isSubmitted() && $campusForm->isValid())
         {
             $entityManager->persist($campus);
             $entityManager->flush();
 
             $this->addFlash('success', 'Campus correctement modifié !');
             return $this->redirectToRoute('gestioncampus_liste');
+        }
+        if($campusForm->isSubmitted() && !$campusForm->isValid())
+        {
+            $this->addFlash('danger', 'Campus non ajoutée');
+            return $this->redirectToRoute('gestioncampus_modifier', ['id'=>$id]);
         }
 
         return $this->render('gestion_campus/modifier.html.twig', [
